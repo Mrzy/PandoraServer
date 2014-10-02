@@ -74,7 +74,7 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 		calendar.setTime(date);
 		calendar.add(calendar.DATE, -1);// 把日期往后增加一天.整数往后推,负数往前移动
 		date = calendar.getTime(); // 这个时间就是日期往后推一天的结果
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd 12:00:00");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd 00:00:01");
 		sql.append("from Data_img_table where 1=1 ");
 		if (filterMap != null && !filterMap.isEmpty()) {
 			if (!"".equals(filterMap.get("webSite"))
@@ -92,32 +92,34 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 							+ "'  ");
 				}
 			}
+			if (filterMap.get("dataType") != null&&filterMap.get("dataType").contains("news"))
+				sql.append(" order by collect_time desc ");
+			else
+				sql.append(" order by rand() ");
 		}
-		if (filterMap.get("dataType").contains("news"))
-			sql.append(" order by collect_time desc ");
-		else
-			sql.append(" order by rand() ");
 		Query query = getSession().createQuery(sql.toString());
-		query.setMaxResults(Integer.parseInt(filterMap.get("limit")));
-		if (!"".equals(filterMap.get("webSite"))
-				&& filterMap.get("webSite") != null
-				&& !"''".equals(filterMap.get("webSite"))
-				&& !"null".equals(filterMap.get("webSite"))) {
-			if (filterMap.get("webSite").indexOf(String.valueOf(",")) == -1)
-				query.setParameter("siteList", filterMap.get("webSite"));
-			else
-				query.setParameterList("siteList", String2list2mapUtil
-						.StringToList(filterMap.get("webSite")).toArray());
-		}
-		if (!"".equals(filterMap.get("dataType"))
-				&& filterMap.get("dataType") != null
-				&& !"''".equals(filterMap.get("dataType"))
-				&& !"null".equals(filterMap.get("dataType"))) {
-			if (filterMap.get("dataType").indexOf(String.valueOf(",")) == -1)
-				query.setParameter("typeList", filterMap.get("dataType"));
-			else
-				query.setParameterList("typeList", String2list2mapUtil
-						.StringToList(filterMap.get("dataType")).toArray());
+		if (filterMap != null && !filterMap.isEmpty()) {
+			query.setMaxResults(Integer.parseInt(filterMap.get("limit")));
+			if (!"".equals(filterMap.get("webSite"))
+					&& filterMap.get("webSite") != null
+					&& !"''".equals(filterMap.get("webSite"))
+					&& !"null".equals(filterMap.get("webSite"))) {
+				if (filterMap.get("webSite").indexOf(String.valueOf(",")) == -1)
+					query.setParameter("siteList", filterMap.get("webSite"));
+				else
+					query.setParameterList("siteList", String2list2mapUtil
+							.StringToList(filterMap.get("webSite")).toArray());
+			}
+			if (!"".equals(filterMap.get("dataType"))
+					&& filterMap.get("dataType") != null
+					&& !"''".equals(filterMap.get("dataType"))
+					&& !"null".equals(filterMap.get("dataType"))) {
+				if (filterMap.get("dataType").indexOf(String.valueOf(",")) == -1)
+					query.setParameter("typeList", filterMap.get("dataType"));
+				else
+					query.setParameterList("typeList", String2list2mapUtil
+							.StringToList(filterMap.get("dataType")).toArray());
+			}
 		}
 		return query.list();
 	}
