@@ -81,21 +81,29 @@ public class LockerAction extends ActionSupport implements
 	 * @throws IOException
 	 */
 	public void queryDataImgTable() throws IOException {
+		ServletActionContext.getResponse().setContentType(
+				"text/json; charset=utf-8");
 		String flag = ServletActionContext.getRequest().getParameter("limit");
 		String webSite = ServletActionContext.getRequest().getParameter(
 				"webSite");
 		String dataType = ServletActionContext.getRequest().getParameter(
 				"dataType");
+		String lastModified = ServletActionContext.getRequest().getParameter(
+				"lastModified");
+		if(null == lastModified || "".equals(lastModified)||"null".equals(lastModified)){
+			lastModified="0";
+		}
 		int limit = 0;
 		if (null != flag && !"".equals(flag))
 			limit = Integer.parseInt(flag);
-		if (limit < 1)
-			limit = 5;
+		if (limit < 1 || limit > 100)
+			limit = 100;
 		PrintWriter out = ServletActionContext.getResponse().getWriter();
 		Map<String, String> filterMap = new HashMap();
 		filterMap.put("limit", String.valueOf(limit));
 		filterMap.put("webSite", webSite);
 		filterMap.put("dataType", dataType);
+		filterMap.put("lastModified", lastModified);
 		try {
 			List<Data_img_table> list = lockerService
 					.queryDataImgTable(filterMap);

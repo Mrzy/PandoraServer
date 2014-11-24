@@ -70,11 +70,14 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 	public List<Data_img_table> queryDataImgTable(Map<String, String> filterMap) {
 		StringBuffer sql = new StringBuffer();
 		Date date = new Date();// 取时间
-		Calendar calendar = new GregorianCalendar();
-		calendar.setTime(date);
-		calendar.add(calendar.DATE, -1);// 把日期往后增加一天.整数往后推,负数往前移动
-		date = calendar.getTime(); // 这个时间就是日期往后推一天的结果
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd 00:00:01");
+		Date lastModified = new Date(Long.parseLong(filterMap
+				.get("lastModified")));// 时间戳转换为时间
+		// Calendar calendar = new GregorianCalendar();
+		// calendar.setTime(date);
+		// calendar.add(calendar.DATE, -1);// 把日期往后增加一天.整数往后推,负数往前移动
+		// date = calendar.getTime(); // 这个时间就是日期往后推一天的结果
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat dfl = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		sql.append("from Data_img_table where 1=1 ");
 		if (filterMap != null && !filterMap.isEmpty()) {
 			if (!"".equals(filterMap.get("webSite"))
@@ -87,15 +90,20 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 					&& !"''".equals(filterMap.get("dataType"))
 					&& !"null".equals(filterMap.get("dataType"))) {
 				sql.append(" and data_type in ( :typeList )  ");
-				if (filterMap.get("dataType").contains("news")) {
-					sql.append(" and collect_time >  '" + df.format(date)
-							+ "'  ");
-				}
+				// if (filterMap.get("dataType").contains("news")) {
+				// }
 			}
-			if (filterMap.get("dataType") != null&&filterMap.get("dataType").contains("news"))
-				sql.append(" order by collect_time desc ");
-			else
-				sql.append(" order by rand() ");
+			if (!"".equals(filterMap.get("lastModified"))) {
+				sql.append(" and collect_time >  '" + dfl.format(lastModified)
+						+ "'  ");
+			}
+
+			// if (filterMap.get("dataType") !=
+			// null&&filterMap.get("dataType").contains("news"))
+			// sql.append(" order by collect_time desc ");
+			// else
+			sql.append(" and collect_time like  '%" + df.format(date) + "%'  ");
+			sql.append(" order by rand() ");
 		}
 		Query query = getSession().createQuery(sql.toString());
 		if (filterMap != null && !filterMap.isEmpty()) {
