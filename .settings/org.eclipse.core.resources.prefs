@@ -1,4 +1,6 @@
-#Thu Oct 23 18:45:08 CST 2014
 eclipse.preferences.version=1
+encoding//WebRoot/data/MyHtml.html=UTF-8
+encoding//WebRoot/data/css.css=UTF-8
+encoding//WebRoot/data/viewDataImg.jsp=UTF-8
 encoding//src/log4j.properties=UTF-8
 encoding/<project>=UTF-8

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import cn.zmdx.locker.entity.Data_img_table;
 import cn.zmdx.locker.entity.Data_table;
+import cn.zmdx.locker.entity.Img;
 
 
 public interface LockerDAO extends ParentDAO {
@@ -20,5 +21,16 @@ public interface LockerDAO extends ParentDAO {
 	 * 
 	 */
 	   public List<Data_img_table> queryDataImgTable(Map<String, String> filterMap);
-	
+	/**
+	 * 根据id查询相关的图文信息
+	 * @param filterMap
+	 * @return
+	 */
+	public List<Img> queryDataById(Map<String, String> filterMap);
+	/**
+    * 根据id获取Data_img_table
+    * @param id
+    * @return
+    */
+   public Data_img_table getDataImgTableById(String id);
 }

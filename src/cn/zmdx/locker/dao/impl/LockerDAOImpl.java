@@ -13,6 +13,7 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import cn.zmdx.locker.dao.interfaces.LockerDAO;
 import cn.zmdx.locker.entity.Data_img_table;
 import cn.zmdx.locker.entity.Data_table;
+import cn.zmdx.locker.entity.Img;
 import cn.zmdx.locker.util.String2list2mapUtil;
 
 public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
@@ -130,6 +131,27 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 			}
 		}
 		return query.list();
+	}
+
+	@Override
+	public List<Img> queryDataById(Map<String, String> filterMap) {
+		StringBuffer sql=new StringBuffer("select i.id,i.imageUrl,i.content from img i left join Data_img d on d.img_id=i.id where 1=1 ");
+		if (filterMap != null && !filterMap.isEmpty()) {
+			if (!"".equals(filterMap.get("id"))
+					&& filterMap.get("id") != null
+					&& !"''".equals(filterMap.get("id"))
+					&& !"null".equals(filterMap.get("id"))) {
+				sql.append(" and d.data_id="+filterMap.get("id"));
+			}
+		}
+		Query query = getSession().createSQLQuery(sql.toString());
+		
+		return query.list();
+	}
+
+	@Override
+	public Data_img_table getDataImgTableById(String id) {
+		return (Data_img_table)this.getHibernateTemplate().get(Data_img_table.class, Integer.parseInt(id));
 	}
 
 }

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
@@ -121,4 +123,32 @@ public class LockerAction extends ActionSupport implements
 		out.close();
 	}
 
+	/**
+	 * 
+	 * 
+	 * @throws IOException
+	 * @author louxiaojian
+	 */
+	public String viewDataImg() throws IOException {
+		ServletActionContext.getResponse().setContentType(
+				"text/json; charset=utf-8");
+		//获取id
+		String id = ServletActionContext.getRequest().getParameter("id");
+		Map<String, String> filterMap = new HashMap();
+		filterMap.put("id", id);
+		//根据id查询相关的图文信息
+		List list=lockerService.queryDataById(filterMap);
+//		StringBuffer sb=new StringBuffer("");
+//		for (int i = 0; i < list.size(); i++) {
+//			Object [] obj=(Object [])list.get(i);
+//			sb.append("<img src=\""+obj[1]+"\" alt=\"\" style=\"word-wrap: break-word !important; box-sizing: border-box !important; visibility: visible !important; width: auto !important;\"/><br/>");
+//			sb.append("<p style=\"max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important; line-height: 25px; text-indent: 2em;\">"+obj[2]+"</p><br style=\"max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;\"/>");
+//		}
+		//根据id获取DataImgTable对象
+		Data_img_table dataImgTable=lockerService.getDataImgTableById(id);
+//		ServletActionContext.getRequest().setAttribute("sb", sb);
+		ServletActionContext.getRequest().setAttribute("list", list);
+		ServletActionContext.getRequest().setAttribute("dataImgTable", dataImgTable);
+		return "viewDataImg";
+	}
 }

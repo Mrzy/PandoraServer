@@ -27,6 +27,7 @@
 		<action name="locker" class="cn.zmdx.locker.actions.LockerAction">
 			<result name="success">/WEB-INF/main.jsp
 			</result>
+			<result name="viewDataImg">/data/viewDataImg.jsp</result>
 		</action>
 		
 		<action name="*_jsp">
