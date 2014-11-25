@@ -2,10 +2,10 @@ package cn.zmdx.locker.dao.interfaces;
 
 import java.util.List;
 import java.util.Map;
-
 import cn.zmdx.locker.entity.Data_img_table;
 import cn.zmdx.locker.entity.Data_table;
 import cn.zmdx.locker.entity.Img;
+import cn.zmdx.locker.entity.WallPaper;
 
 
 public interface LockerDAO extends ParentDAO {
@@ -33,4 +33,11 @@ public interface LockerDAO extends ParentDAO {
     * @return
     */
    public Data_img_table getDataImgTableById(String id);
+	   
+	   /**
+	    * 查询壁纸数据
+	    * 
+	    */
+	   public List<WallPaper> queryWallPaper(Map<String, String> filterMap);
+	
 }

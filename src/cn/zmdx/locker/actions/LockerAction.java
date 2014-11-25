@@ -13,6 +13,7 @@ import org.apache.struts2.ServletActionContext;
 
 import cn.zmdx.locker.entity.Data_img_table;
 import cn.zmdx.locker.entity.Data_table;
+import cn.zmdx.locker.entity.WallPaper;
 import cn.zmdx.locker.service.impl.LockerServiceImpl;
 
 import com.alibaba.fastjson.JSON;
@@ -92,8 +93,9 @@ public class LockerAction extends ActionSupport implements
 				"dataType");
 		String lastModified = ServletActionContext.getRequest().getParameter(
 				"lastModified");
-		if(null == lastModified || "".equals(lastModified)||"null".equals(lastModified)){
-			lastModified="0";
+		if (null == lastModified || "".equals(lastModified)
+				|| "null".equals(lastModified)) {
+			lastModified = "0";
 		}
 		int limit = 0;
 		if (null != flag && !"".equals(flag))
@@ -151,4 +153,30 @@ public class LockerAction extends ActionSupport implements
 		ServletActionContext.getRequest().setAttribute("dataImgTable", dataImgTable);
 		return "viewDataImg";
 	}
+	/** 查询壁纸数据
+	 * 
+	 * @throws IOException
+	 */
+	public void queryWallPaper() throws IOException {
+		ServletActionContext.getResponse().setContentType(
+				"text/json; charset=utf-8");
+		String webSite = ServletActionContext.getRequest().getParameter("webSite");
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		Map<String, String> filterMap = new HashMap();
+		filterMap.put("webSite", webSite);
+		try {
+			List<WallPaper> list = lockerService.queryWallPaper(filterMap);
+			if (null != list && list.size() > 0)
+				out.print("{\"state\":\"success\",\"data\":"+ JSON.toJSONString(list, true) + "}");
+			else
+				out.print("{\"state\":\"null\"}");
+		} catch (Exception e) {
+			out.print("{\"state\":\"error\"}");
+			logger.error(e);
+			e.printStackTrace();
+		}
+		out.flush();
+		out.close();
+	}
+
 }

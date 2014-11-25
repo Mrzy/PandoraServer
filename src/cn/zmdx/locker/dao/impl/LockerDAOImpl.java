@@ -1,9 +1,7 @@
 package cn.zmdx.locker.dao.impl;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +12,7 @@ import cn.zmdx.locker.dao.interfaces.LockerDAO;
 import cn.zmdx.locker.entity.Data_img_table;
 import cn.zmdx.locker.entity.Data_table;
 import cn.zmdx.locker.entity.Img;
+import cn.zmdx.locker.entity.WallPaper;
 import cn.zmdx.locker.util.String2list2mapUtil;
 
 public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
@@ -152,6 +151,19 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 	@Override
 	public Data_img_table getDataImgTableById(String id) {
 		return (Data_img_table)this.getHibernateTemplate().get(Data_img_table.class, Integer.parseInt(id));
+	}
+
+	public List<WallPaper> queryWallPaper(Map<String, String> filterMap) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("from WallPaper where 1=1 ");
+		if (filterMap != null && !filterMap.isEmpty()) {
+			sql.append(" order by publishDATE desc ");
+		}
+		Query query = getSession().createQuery(sql.toString());
+		if (filterMap != null && !filterMap.isEmpty()) {
+			query.setMaxResults(24);
+		}
+		return query.list();
 	}
 
 }
