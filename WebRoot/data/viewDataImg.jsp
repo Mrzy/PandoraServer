@@ -10,6 +10,7 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="format-detection" content="telephone=no">
+	<link rel="shortcut icon" href="<%=request.getContextPath() %>/data/images/pandoraLogo.ico" type="image/x-icon" />
 	<title>${dataImgTable.title }</title>        
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/data/css.css"/>
 	</head>    
