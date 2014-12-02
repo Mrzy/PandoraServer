@@ -134,7 +134,7 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 
 	@Override
 	public List<Img> queryDataById(Map<String, String> filterMap) {
-		StringBuffer sql=new StringBuffer("select i.id,i.imageUrl,i.content from img i left join Data_img d on d.img_id=i.id where 1=1 ");
+		StringBuffer sql=new StringBuffer("select i.id,i.imageUrl,i.content from img i left join data_img d on d.img_id=i.id where 1=1 ");
 		if (filterMap != null && !filterMap.isEmpty()) {
 			if (!"".equals(filterMap.get("id"))
 					&& filterMap.get("id") != null
