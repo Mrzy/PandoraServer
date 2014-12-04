@@ -6,13 +6,16 @@ html {
 body {
 	line-height: 1.6;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 16px
+	font-size: 16px;
+	color: #C0C0C0;
 }
 
 body,h1,h2,h3,h4,h5,p,ul,ol,dl,dd,fieldset,textarea {
 	margin: 0
 }
-
+.zh_CN{
+	background-color: transparent;
+}
 fieldset,legend,textarea,input,button {
 	padding: 0
 }
@@ -42,7 +45,11 @@ a {
 }
 
 .rich_media_inner {
-	padding: 15px 10px
+	padding: 15px 10px;
+	background-image: url(images/gesture_bg1.jpg);
+	background-size:cover;
+	position:absolute;
+	background-color: transparent;
 }
 
 .rich_media_title {
@@ -89,8 +96,7 @@ a {
 }
 
 .rich_media_content {
-	margin-top: 18px;
-	color: #3e3e3e;
+/* 	color: #3e3e3e; */
 	word-wrap: break-word;
 	-webkit-hyphens: auto;
 	-ms-hyphens: auto;
@@ -167,7 +173,7 @@ a {
 	.rich_media {
 		width: 740px;
 		margin-left: auto;
-		margin-right: auto
+		margin-right: auto;
 	}
 	.rich_media_inner {
 		padding: 20px;
@@ -184,7 +190,7 @@ a {
 	.rich_media_title {
 		padding-bottom: 10px;
 		margin-bottom: 5px;
-		border-bottom: 1px solid #e7e7eb
+		text-align: center;
 	}
 }
 
@@ -410,7 +416,7 @@ span.btn.btn_loading button,span.btn.btn_disabled button {
 		background-color: #fff
 	}
 	.rich_media {
-		position: relative
+		position: relative;
 	}
 	.rich_media_inner {
 		padding-bottom: 78px
@@ -455,7 +461,8 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .rich_media_meta.nickname {
-	max-width: 10em
+	max-width: 10em;
+		color: #C0C0C0;
 }
 
 .rich_media_extra {
@@ -649,10 +656,10 @@ td p {
 		background-color: #fff
 	}
 	.rich_media_meta.nickname {
-		max-width: none
+		max-width: none;
 	}
 	.rich_media_inner {
-		position: relative
+		position: relative;
 	}
 	.qr_code_pc_outer {
 		display: block !important;

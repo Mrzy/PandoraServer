@@ -16,19 +16,24 @@
 	</head>    
 <body id="activity-detail" class="zh_CN ">           
 	
-    <div class="rich_media ">                
+    <div class="rich_media " style="">                
     	<div class="rich_media_inner">            
-    		<h2 class="rich_media_title" id="activity-name">                ${dataImgTable.title }             </h2>            
-    		<div class="rich_media_meta_list">                
-    			<em id="post-date" class="rich_media_meta text"><fmt:formatDate value="${dataImgTable.collect_time }" pattern="yyyy-MM-dd"/></em>                                
-    			<a class="rich_media_meta link nickname" href="javascript:void(0);" id="post-user">${dataImgTable.collect_website }</a>            
+    		<div class="rich_media_meta_list" style="text-align: right;">                                             
+    			<font color="white">来自：</font> <a class="rich_media_meta link nickname" href="javascript:void(0);" id="post-user">${dataImgTable.collect_website }</a>            
     		</div>            
     		<div id="page-content">                
     			<div id="img-content">
     				<div class="rich_media_content" id="js_content">
     					<c:forEach items="${list }" var="obj" varStatus="vs">
-	    					<p style=""><img style="text-align: left;" alt="" src="${obj[1] }"></p>
-	    					<p style=""><span style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important; color: rgb(192, 80, 77);">${vs.count }、${obj[2] }</span></p>
+    						<c:if test="${vs.count==1 }">
+	    						<p style="text-align: center;margin-top: 10px;"><img alt="" src="${obj[1] }" style="width: 98%;"></p>
+	    						<h2 class="rich_media_title" style="text-align: center;margin-top: 15px;color: white;" id="activity-name">${dataImgTable.title }</h2>
+	    						<p style="margin-top: 12px;color: white;"><span style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;padding-top: 100px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${obj[2] }</span></p>
+    						</c:if>
+    						<c:if test="${vs.count!=1 }">
+	    						<p style="text-align: center;margin-top: 12px;"><img style="text-align: left;width: 98%;margin-top: 20px;" alt="" src="${obj[1] }"></p>
+	    						<p style="color: white;margin-top: 7px;"><span style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${obj[2] }</span></p>
+    						</c:if>
 						</c:forEach>
     					
     				</div>                    
