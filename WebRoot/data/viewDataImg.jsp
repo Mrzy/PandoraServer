@@ -28,18 +28,18 @@
     						<c:if test="${vs.count==1 }">
 	    						<p style="text-align: center;margin-top: 10px;"><img alt="" src="${obj[1] }" style="width: 98%;"></p>
 	    						<h2 class="rich_media_title" style="text-align: center;margin-top: 15px;color: white;" id="activity-name">${dataImgTable.title }</h2>
-	    						<p style="margin-top: 12px;color: white;"><span style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;padding-top: 100px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${obj[2] }</span></p>
+	    						<p style="margin-top: 12px;"><span style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;padding-top: 100px;">${obj[2] }</span></p>
     						</c:if>
     						<c:if test="${vs.count!=1 }">
 	    						<p style="text-align: center;margin-top: 12px;"><img style="text-align: left;width: 98%;margin-top: 20px;" alt="" src="${obj[1] }"></p>
-	    						<p style="color: white;margin-top: 7px;"><span style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${obj[2] }</span></p>
+	    						<p style="margin-top: 7px;"><span style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;">${obj[2] }</span></p>
     						</c:if>
 						</c:forEach>
-    					
     				</div>                    
 				</div>                                
 			</div>            
-		</div>    
+		<div style="height: 24px;"></div>   
+		</div> 
 	</div>                
 	</body>
 </html>

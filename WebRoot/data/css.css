@@ -55,7 +55,7 @@ a {
 .rich_media_title {
 	line-height: 24px;
 	font-weight: 700;
-	font-size: 20px;
+	font-size: 22px;
 	word-wrap: break-word;
 	-webkit-hyphens: auto;
 	-ms-hyphens: auto;
@@ -123,7 +123,7 @@ a {
 	max-width: 100% !important;
 	word-wrap: break-word !important;
 	-webkit-box-sizing: border-box !important;
-	box-sizing: border-box !important
+	box-sizing: border-box !important；
 }
 
 .rich_media_content img {
@@ -490,7 +490,8 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .rich_media_content {
-	font-size: 16px;
+	font-size: 18px;
+	color:rgba(255,255,255,0.9);
 	overflow: hidden
 }
 
