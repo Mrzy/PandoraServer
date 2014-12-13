@@ -43,5 +43,9 @@ public class LockerServiceImpl implements LockerService {
 	public List<WallPaper> queryWallPaper(Map<String, String> filterMap) {
 		return lockerDAO.queryWallPaper(filterMap);
 	}
+	@Override
+	public List queryDataTagById(Map<String, String> filterMap) {
+		return lockerDAO.queryDataTagById(filterMap);
+	}
 
 }

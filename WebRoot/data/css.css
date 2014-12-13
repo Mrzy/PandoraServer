@@ -6,12 +6,12 @@ html {
 body {
 	line-height: 1.6;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 16px;
-	color: #C0C0C0;
+	font-size: 13px;
+	color: #9b9b9b;
 }
 
 body,h1,h2,h3,h4,h5,p,ul,ol,dl,dd,fieldset,textarea {
-	margin: 0
+	margin: 0;
 }
 .zh_CN{
 	background-color: transparent;
@@ -46,14 +46,15 @@ a {
 
 .rich_media_inner {
 	padding: 15px 10px;
-	background-image: url(images/gesture_bg1.jpg);
-	background-size:cover;
+/* 	background-image: url(images/background.png); */
+	background-size:100% 100%;
 	position:absolute;
-	background-color: transparent;
+	background-color: #fffdf5;
+	-moz-background-size: cover; 
 }
 
 .rich_media_title {
-	line-height: 24px;
+	line-height: 21px;
 	font-weight: 700;
 	font-size: 22px;
 	word-wrap: break-word;
@@ -73,7 +74,7 @@ a {
 	font-weight: 400;
 	font-style: normal;
 	margin-right: .5em;
-	font-size: 12px;
+	font-size: 11px;
 	width: auto;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -107,7 +108,7 @@ a {
 	*zoom: 1;
 	min-height: 1em;
 	word-wrap: normal;
-	white-space: pre-wrap;
+/* 	white-space: pre-wrap; */
 	margin-top: 1em;
 	margin-bottom: 1em
 }
@@ -171,13 +172,13 @@ a {
 
 @media screen and (min-width:1023px) {
 	.rich_media {
-		width: 740px;
+		width: 50%;
 		margin-left: auto;
 		margin-right: auto;
 	}
 	.rich_media_inner {
 		padding: 20px;
-		background-color: #fff;
+/* 		background-color: #fff; */
 		border: 1px solid #d9dadc;
 		border-top-width: 0
 	}
@@ -462,7 +463,7 @@ h1,h2,h3,h4,h5,h6 {
 
 .rich_media_meta.nickname {
 	max-width: 10em;
-		color: #C0C0C0;
+		color: #9b9b9b;
 }
 
 .rich_media_extra {
@@ -490,8 +491,8 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .rich_media_content {
-	font-size: 18px;
-	color:rgba(255,255,255,0.9);
+	font-size: 17px;
+	color:#767676;
 	overflow: hidden
 }
 
@@ -800,3 +801,45 @@ td p {
 	padding-right: 63px;
 	width: auto
 }
+.div1{
+		z-index: 55555;
+		background-image: url('images/wait4.gif');
+		background-repeat:inherit;
+opacity:0.3;/*FF*/
+filter:alpha(opacity=20);/*IE*/
+text-align: center;
+line-height: 40px;
+font-size: 12px;
+font-weight: bold;
+width: 50px;
+height: 50px;
+left:50%;/*FF IE7*/
+top:50%;/*FF IE7*/
+margin-left:-20px!important;/*FF IE7 该值为本身宽的一半 */
+margin-top:-40px!important;/*FF IE7 该值为本身高的一半*/
+margin-top:0px;
+position:fixed!important;/*FF IE7*/
+position:absolute;/*IE6*/
+_top:       expression(eval(document.compatMode &&
+            document.compatMode=='CSS1Compat') ?
+            documentElement.scrollTop + (document.documentElement.clientHeight-this.offsetHeight)/2 :/*IE6*/
+            document.body.scrollTop + (document.body.clientHeight - this.clientHeight)/2);/*IE5 IE5.5*/		
+
+	}
+	
+	.bg {
+background-color: #666;
+width: 100%;
+height: 100%;
+left:0;
+top:0;/*FF IE7*/
+filter:alpha(opacity=50);/*IE*/
+opacity:0.5;/*FF*/
+z-index: 55554;
+position:fixed!important;/*FF IE7*/
+position:absolute;/*IE6*/
+_top:       expression(eval(document.compatMode &&
+            document.compatMode=='CSS1Compat') ?
+            documentElement.scrollTop + (document.documentElement.clientHeight-this.offsetHeight)/2 :/*IE6*/
+            document.body.scrollTop + (document.body.clientHeight - this.clientHeight)/2);/*IE5 IE5.5*/
+} 

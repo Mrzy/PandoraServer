@@ -166,4 +166,20 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 		return query.list();
 	}
 
+	@Override
+	public List queryDataTagById(Map<String, String> filterMap) {
+		StringBuffer sql=new StringBuffer("select t.id,t.tag_name from tag t left join data_tag dt on dt.tag_id=t.id where 1=1 ");
+		if (filterMap != null && !filterMap.isEmpty()) {
+			if (!"".equals(filterMap.get("id"))
+					&& filterMap.get("id") != null
+					&& !"''".equals(filterMap.get("id"))
+					&& !"null".equals(filterMap.get("id"))) {
+				sql.append(" and dt.data_id="+filterMap.get("id"));
+			}
+		}
+		Query query = getSession().createSQLQuery(sql.toString());
+		
+		return query.list();
+	}
+
 }

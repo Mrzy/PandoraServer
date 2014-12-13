@@ -13,6 +13,7 @@ import org.apache.struts2.ServletActionContext;
 
 import cn.zmdx.locker.entity.Data_img_table;
 import cn.zmdx.locker.entity.Data_table;
+import cn.zmdx.locker.entity.Data_tag;
 import cn.zmdx.locker.entity.WallPaper;
 import cn.zmdx.locker.service.impl.LockerServiceImpl;
 
@@ -140,6 +141,8 @@ public class LockerAction extends ActionSupport implements
 		filterMap.put("id", id);
 		//根据id查询相关的图文信息
 		List list=lockerService.queryDataById(filterMap);
+		//根据id获取标签信息
+		List taglist=lockerService.queryDataTagById(filterMap);
 //		StringBuffer sb=new StringBuffer("");
 //		for (int i = 0; i < list.size(); i++) {
 //			Object [] obj=(Object [])list.get(i);
@@ -150,6 +153,7 @@ public class LockerAction extends ActionSupport implements
 		Data_img_table dataImgTable=lockerService.getDataImgTableById(id);
 //		ServletActionContext.getRequest().setAttribute("sb", sb);
 		ServletActionContext.getRequest().setAttribute("list", list);
+		ServletActionContext.getRequest().setAttribute("taglist", taglist);
 		ServletActionContext.getRequest().setAttribute("dataImgTable", dataImgTable);
 		return "viewDataImg";
 	}

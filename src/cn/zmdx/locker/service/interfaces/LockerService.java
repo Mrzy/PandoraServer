@@ -40,4 +40,11 @@ public interface LockerService {
     * 
     */
    public List<WallPaper> queryWallPaper(Map<String, String> filterMap);
+
+   /**
+    * 根据数据id获取相应标签
+    * @param filterMap
+    * @return
+    */
+   public List queryDataTagById(Map<String, String> filterMap);
 }
