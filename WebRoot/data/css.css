@@ -48,7 +48,7 @@ a {
 	padding: 15px 10px;
 /* 	background-image: url(images/background.png); */
 	background-size:100% 100%;
-	position:absolute;
+	/*position:absolute;*/
 	background-color: #fffdf5;
 	-moz-background-size: cover; 
 }
