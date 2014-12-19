@@ -37,8 +37,8 @@
 </style>
 <body id="activity-detail" class="zh_CN " onload="hiddenDiv()" style="background-color: black;">
 	<div class="rich_media " style="">
-		<div id="div1" class="div1"></div>
-		<div id="bg" class="bg"></div>
+		<!-- <div id="div1" class="div1"></div>
+		<div id="bg" class="bg"></div> -->
 		<div style="padding: 2px;padding-top:4px;">
 		<div style="padding: 2px;background-color: #DCD5C2;border-radius: 8px;">
 		<div class="rich_media_inner" style="border-radius: 8px;">
@@ -74,8 +74,7 @@
 								</p>
 								<p style="margin-top: 7px;padding-left: 7px;">
 									<span
-										style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;">${obj[2]
-										}</span>
+										style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;">${obj[2]}</span>
 								</p>
 							</c:if>
 						</c:forEach>
