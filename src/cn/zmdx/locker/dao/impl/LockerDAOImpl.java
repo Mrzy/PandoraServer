@@ -78,7 +78,7 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 		// date = calendar.getTime(); // 这个时间就是日期往后推一天的结果
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat dfl = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		sql.append("from Data_img_table where 1=1 ");
+		sql.append("select id,title,url,imgUrl,data_type,collect_website,release_time,top,step,collect_time,news_type,data_sub,type,userid from (select id,title,url,imgUrl,data_type,collect_website,release_time,top,step,collect_time,news_type,data_sub,type,userid from data_img_table where 1=1 ");
 		if (filterMap != null && !filterMap.isEmpty()) {
 			if (!"".equals(filterMap.get("webSite"))
 					&& filterMap.get("webSite") != null
@@ -90,24 +90,17 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 					&& !"''".equals(filterMap.get("dataType"))
 					&& !"null".equals(filterMap.get("dataType"))) {
 				sql.append(" and data_type in ( :typeList )  ");
-				// if (filterMap.get("dataType").contains("news")) {
-				// }
 			}
 			if (!"".equals(filterMap.get("lastModified"))) {
 				sql.append(" and collect_time >  '" + dfl.format(lastModified)
 						+ "'  ");
 			}
-
-			// if (filterMap.get("dataType") !=
-			// null&&filterMap.get("dataType").contains("news"))
-			// sql.append(" order by collect_time desc ");
-			// else
 			sql.append(" and collect_time like  '%" + df.format(date) + "%'  ");
-			sql.append(" order by rand() ");
+			sql.append(" LIMIT "+Integer.parseInt(filterMap.get("limit"))+" ) t  ORDER BY RAND() ");
 		}
-		Query query = getSession().createQuery(sql.toString());
+		Query query = getSession().createSQLQuery(sql.toString()).addEntity(Data_img_table.class);
 		if (filterMap != null && !filterMap.isEmpty()) {
-			query.setMaxResults(Integer.parseInt(filterMap.get("limit")));
+//			query.setMaxResults(Integer.parseInt(filterMap.get("limit")));
 			if (!"".equals(filterMap.get("webSite"))
 					&& filterMap.get("webSite") != null
 					&& !"''".equals(filterMap.get("webSite"))

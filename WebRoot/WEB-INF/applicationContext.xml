@@ -84,6 +84,7 @@
 			<list>
 				<value>userDAO</value>
 				<value>lockerDAO</value>
+				<value>notifyDAO</value>
 			</list>
 		</property>
 		<property name="interceptorNames">

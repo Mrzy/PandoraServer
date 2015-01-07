@@ -110,11 +110,9 @@ public class LockerAction extends ActionSupport implements
 		filterMap.put("dataType", dataType);
 		filterMap.put("lastModified", lastModified);
 		try {
-			List<Data_img_table> list = lockerService
-					.queryDataImgTable(filterMap);
+			List<Data_img_table> list = lockerService.queryDataImgTable(filterMap);
 			if (null != list && list.size() > 0)
-				out.print("{\"state\":\"success\",\"data\":"
-						+ JSON.toJSONString(list, true) + "}");
+				out.print("{\"state\":\"success\",\"data\":"+ JSON.toJSONString(list, true) + "}");
 			else
 				out.print("{\"state\":\"null\"}");
 		} catch (Exception e) {

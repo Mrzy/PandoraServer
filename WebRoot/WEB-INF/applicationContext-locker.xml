@@ -19,5 +19,17 @@
 		</constructor-arg>
 	</bean>
 	
+	<bean id="notifyDAO" class="cn.zmdx.locker.dao.impl.NotifyDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<constructor-arg>
+			<ref bean="hibernateTemplate" />
+		</constructor-arg>
+	</bean>
+	<bean id="notifyService" class="cn.zmdx.locker.service.impl.NotifyServiceImpl">
+		<constructor-arg>
+			<ref bean="notifyDAO" />
+		</constructor-arg>
+	</bean>
+	
 
 </beans>
