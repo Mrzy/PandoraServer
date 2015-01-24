@@ -95,7 +95,7 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 				sql.append(" and collect_time >  '" + dfl.format(lastModified)
 						+ "'  ");
 			}
-			sql.append(" and collect_time like  '%" + df.format(date) + "%'  ");
+			sql.append(" and collect_time <=  '" + dfl.format(date) + "'  ");
 			sql.append(" LIMIT "+Integer.parseInt(filterMap.get("limit"))+" ) t  ORDER BY RAND() ");
 		}
 		Query query = getSession().createSQLQuery(sql.toString()).addEntity(Data_img_table.class);

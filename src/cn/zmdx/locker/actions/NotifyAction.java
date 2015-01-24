@@ -52,7 +52,7 @@ public class NotifyAction extends ActionSupport {
 			if (null != list && list.size() > 0)
 				out.print("{\"state\":\"success\",\"lastModified\":"+list.get(0).getLastModified().getTime()+",\"data\":" + JSON.toJSONString(list, true) + "}");
 			else
-				out.print("{\"state\":\"null\"}");
+				out.print("{\"state\":\"success\",\"data\":\"null\"}");
 		} catch (Exception e) {
 			out.print("{\"state\":\"error\"}");
 			logger.error(e);
