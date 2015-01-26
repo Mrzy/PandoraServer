@@ -69,7 +69,7 @@ public class LockerAction extends ActionSupport implements
 				out.print("{\"state\":\"success\",\"data\":"
 						+ JSON.toJSONString(list, true) + "}");
 			else
-				out.print("{\"state\":\"success\",\"data\":\"null\"}");
+				out.print("{\"state\":\"null\"}");
 		} catch (Exception e) {
 			out.print("{\"state\":\"error\"}");
 			logger.error(e);
@@ -114,7 +114,7 @@ public class LockerAction extends ActionSupport implements
 			if (null != list && list.size() > 0)
 				out.print("{\"state\":\"success\",\"data\":"+ JSON.toJSONString(list, true) + "}");
 			else
-				out.print("{\"state\":\"success\",\"data\":\"null\"}");
+				out.print("{\"state\":\"null\"}");
 		} catch (Exception e) {
 			out.print("{\"state\":\"error\"}");
 			logger.error(e);
@@ -171,7 +171,7 @@ public class LockerAction extends ActionSupport implements
 			if (null != list && list.size() > 0)
 				out.print("{\"state\":\"success\",\"data\":"+ JSON.toJSONString(list, true) + "}");
 			else
-				out.print("{\"state\":\"success\",\"data\":\"null\"}");
+				out.print("{\"state\":\"null\"}");
 		} catch (Exception e) {
 			out.print("{\"state\":\"error\"}");
 			logger.error(e);
