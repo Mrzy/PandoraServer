@@ -29,7 +29,10 @@
 			</result>
 			<result name="viewDataImg">/data/viewDataImg.jsp</result>
 		</action>
-		
+		<action name="notify" class="cn.zmdx.locker.actions.NotifyAction">
+			<result name="success">/WEB-INF/main.jsp
+			</result>
+		</action>
 		<action name="*_jsp">
 			<result>/WEB-INF/{1}.jsp</result>
 		</action>
