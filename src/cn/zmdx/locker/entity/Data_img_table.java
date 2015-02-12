@@ -15,6 +15,8 @@ public class Data_img_table {
 	private int step;
 	private String collect_website;
 	private String data_type;
+	private int views;
+	private int data_view;
 	
 	public int getId() {
 		return id;
@@ -76,7 +78,17 @@ public class Data_img_table {
 	public void setData_type(String data_type) {
 		this.data_type = data_type;
 	}
-
-	
+	public int getViews() {
+		return views;
+	}
+	public void setViews(int views) {
+		this.views = views;
+	}
+	public int getData_view() {
+		return data_view;
+	}
+	public void setData_view(int data_view) {
+		this.data_view = data_view;
+	}
 	
 }

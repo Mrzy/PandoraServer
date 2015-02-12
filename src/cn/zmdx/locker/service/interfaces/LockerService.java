@@ -47,4 +47,11 @@ public interface LockerService {
     * @return
     */
    public List queryDataTagById(Map<String, String> filterMap);
+   
+   /**
+    * 增加浏览量
+    * @param id
+    * @return
+    */
+   public void addViews(String id);
 }

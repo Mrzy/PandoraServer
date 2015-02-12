@@ -175,4 +175,15 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 		return query.list();
 	}
 
+	@Override
+	public void addViews(String id) {
+		int view = (int)((Math.random()*5 + 3)*3-7);
+		StringBuffer sql=new StringBuffer("update data_img_table set views = views +"+view+" where id = "+id+" ");
+		StringBuffer data_sql=new StringBuffer("update data_img_table set data_view = data_view + 1 where id = "+id+" ");
+		Query query = getSession().createSQLQuery(sql.toString());
+		Query data_query = getSession().createSQLQuery(data_sql.toString());
+		query.executeUpdate();
+		data_query.executeUpdate();
+	}
+
 }

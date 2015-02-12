@@ -48,4 +48,9 @@ public class LockerServiceImpl implements LockerService {
 		return lockerDAO.queryDataTagById(filterMap);
 	}
 
+	@Override
+	public void addViews(String id) {
+		lockerDAO.addViews(id);
+	}
+
 }

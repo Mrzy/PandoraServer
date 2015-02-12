@@ -110,9 +110,11 @@ public class LockerAction extends ActionSupport implements
 		filterMap.put("dataType", dataType);
 		filterMap.put("lastModified", lastModified);
 		try {
-			List<Data_img_table> list = lockerService.queryDataImgTable(filterMap);
+			List<Data_img_table> list = lockerService
+					.queryDataImgTable(filterMap);
 			if (null != list && list.size() > 0)
-				out.print("{\"state\":\"success\",\"data\":"+ JSON.toJSONString(list, true) + "}");
+				out.print("{\"state\":\"success\",\"data\":"
+						+ JSON.toJSONString(list, true) + "}");
 			else
 				out.print("{\"state\":\"null\"}");
 		} catch (Exception e) {
@@ -133,43 +135,48 @@ public class LockerAction extends ActionSupport implements
 	public String viewDataImg() throws IOException {
 		ServletActionContext.getResponse().setContentType(
 				"text/json; charset=utf-8");
-		//获取id
+		// 获取id
 		String id = ServletActionContext.getRequest().getParameter("id");
 		Map<String, String> filterMap = new HashMap();
 		filterMap.put("id", id);
-		//根据id查询相关的图文信息
-		List list=lockerService.queryDataById(filterMap);
-		//根据id获取标签信息
-		List taglist=lockerService.queryDataTagById(filterMap);
-//		StringBuffer sb=new StringBuffer("");
-//		for (int i = 0; i < list.size(); i++) {
-//			Object [] obj=(Object [])list.get(i);
-//			sb.append("<img src=\""+obj[1]+"\" alt=\"\" style=\"word-wrap: break-word !important; box-sizing: border-box !important; visibility: visible !important; width: auto !important;\"/><br/>");
-//			sb.append("<p style=\"max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important; line-height: 25px; text-indent: 2em;\">"+obj[2]+"</p><br style=\"max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;\"/>");
-//		}
-		//根据id获取DataImgTable对象
-		Data_img_table dataImgTable=lockerService.getDataImgTableById(id);
-//		ServletActionContext.getRequest().setAttribute("sb", sb);
+		// 根据id查询相关的图文信息
+		List list = lockerService.queryDataById(filterMap);
+		// 根据id获取标签信息
+		List taglist = lockerService.queryDataTagById(filterMap);
+		// StringBuffer sb=new StringBuffer("");
+		// for (int i = 0; i < list.size(); i++) {
+		// Object [] obj=(Object [])list.get(i);
+		// sb.append("<img src=\""+obj[1]+"\" alt=\"\" style=\"word-wrap: break-word !important; box-sizing: border-box !important; visibility: visible !important; width: auto !important;\"/><br/>");
+		// sb.append("<p style=\"max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important; line-height: 25px; text-indent: 2em;\">"+obj[2]+"</p><br style=\"max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;\"/>");
+		// }
+		// 根据id获取DataImgTable对象
+		Data_img_table dataImgTable = lockerService.getDataImgTableById(id);
+		// ServletActionContext.getRequest().setAttribute("sb", sb);
 		ServletActionContext.getRequest().setAttribute("list", list);
 		ServletActionContext.getRequest().setAttribute("taglist", taglist);
-		ServletActionContext.getRequest().setAttribute("dataImgTable", dataImgTable);
+		ServletActionContext.getRequest().setAttribute("dataImgTable",
+				dataImgTable);
 		return "viewDataImg";
 	}
-	/** 查询壁纸数据
+
+	/**
+	 * 查询壁纸数据
 	 * 
 	 * @throws IOException
 	 */
 	public void queryWallPaper() throws IOException {
 		ServletActionContext.getResponse().setContentType(
 				"text/json; charset=utf-8");
-		String webSite = ServletActionContext.getRequest().getParameter("webSite");
+		String webSite = ServletActionContext.getRequest().getParameter(
+				"webSite");
 		PrintWriter out = ServletActionContext.getResponse().getWriter();
 		Map<String, String> filterMap = new HashMap();
 		filterMap.put("webSite", webSite);
 		try {
 			List<WallPaper> list = lockerService.queryWallPaper(filterMap);
 			if (null != list && list.size() > 0)
-				out.print("{\"state\":\"success\",\"data\":"+ JSON.toJSONString(list, true) + "}");
+				out.print("{\"state\":\"success\",\"data\":"
+						+ JSON.toJSONString(list, true) + "}");
 			else
 				out.print("{\"state\":\"null\"}");
 		} catch (Exception e) {
@@ -181,4 +188,25 @@ public class LockerAction extends ActionSupport implements
 		out.close();
 	}
 
+	/**
+	 * 增加浏览量 张加宁
+	 * 
+	 * @throws IOException
+	 */
+	public void addViews() throws IOException {
+		ServletActionContext.getResponse().setContentType(
+				"text/json; charset=utf-8");
+		String id = ServletActionContext.getRequest().getParameter("id");
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		try {
+			lockerService.addViews(id);
+			out.print("{\"state\":\"success\"}");
+		} catch (Exception e) {
+			out.print("{\"state\":\"error\"}");
+			logger.error(e);
+			e.printStackTrace();
+		}
+		out.flush();
+		out.close();
+	}
 }

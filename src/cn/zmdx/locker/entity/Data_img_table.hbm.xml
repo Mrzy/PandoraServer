@@ -14,6 +14,7 @@
 		<property name="step" column="step" />
 		<property name="collect_website" column="collect_website" />
 		<property name="data_type" column="data_type" />
+		<property name="views" column="views" />
 	</class>
 
 </hibernate-mapping>
