@@ -32,10 +32,28 @@
 		document.getElementById("div1").style.display = "none";
 		document.getElementById("bg").style.display = "none";
 	}
+	function addViews(){
+		var params = {"id": ${dataImgTable.id}};  
+		var actionUrl = "<%=request.getContextPath()%>/locker!addViews.action";  
+		$.ajax({  
+			  url : actionUrl,  
+		      type : "post", 
+		      data : params,  
+		      dataType : "json",  
+		      cache : false,  
+		      error : function(textStatus, errorThrown) {  
+		      },  
+		      success : function(data, textStatus) {
+		      	if(data.result=='success'){
+		      	}else{
+		      	}
+		    }  
+		});
+	}
 </script>
 <style type="text/css">
 </style>
-<body id="activity-detail" class="zh_CN " onload="hiddenDiv()" style="background-color: black;">
+<body id="activity-detail" class="zh_CN " onload="addViews()" style="background-color: black;">
 	<div class="rich_media " style="">
 		<!-- <div id="div1" class="div1"></div>
 		<div id="bg" class="bg"></div> -->
@@ -57,6 +75,10 @@
 							<c:if test="${vs.count==1 }">
 								<p style="text-align: center;margin-top: 10px;">
 									<img alt="" src="${obj[1] }" style="width: 100%;">
+								</p>
+								<p style="text-align: right;font-size: 12px;">
+								<img alt="" src="<%=request.getContextPath()%>/data/images/eye.png">
+								<span>${dataImgTable.views}</span>
 								</p>
 								<h2 class="rich_media_title"
 									style="text-align: center;margin-top: 15px;color: #7e695b;padding-left: 25px;padding-right: 30px;line-height: 30px;"
