@@ -148,7 +148,10 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 
 	public List<WallPaper> queryWallPaper(Map<String, String> filterMap) {
 		StringBuffer sql = new StringBuffer();
+		Date date = new Date();// 取时间
+		SimpleDateFormat dfl = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		sql.append("from WallPaper where 1=1 ");
+		sql.append(" and publishDATE <=  '" + dfl.format(date) + "'  ");
 		if (filterMap != null && !filterMap.isEmpty()) {
 			sql.append(" order by publishDATE desc ");
 		}
