@@ -22,27 +22,28 @@
 	src="<%=request.getContextPath()%>/data/jquery-1.7.2.min.js"></script>
 </head>
 <script type="text/javascript">
-	$().ready(function() {
-		// 		document.getElementById("div1").style.left=(document.body.scrollLeft + document.body.clientHeight/2);
-		// 		document.getElementById("div1").style.top=(document.body.scrollTop + document.body.clientWidth/2);
-		// 		document.getElementById("div1").style.top=(document.body.offsetHeight-200)/2;
-		// 		alert(document.getElementById("div1").style.left+"---"+document.getElementById("div1").style.top)
-	});
-	function hiddenDiv() {
-		document.getElementById("div1").style.display = "none";
-		document.getElementById("bg").style.display = "none";
+	String.prototype.httpHtml = function() {
+	   var reg = /(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
+	   var replaceStr = '<a href="$1$2">$1$2</a>';
+	   return this.replace(reg,replaceStr);
+	}
+	function replaceHTTP(){
+		var spans = document.getElementsByTagName("pre");
+		for(var i = 0;i<spans.length;i++){
+			spans[i].innerHTML = spans[i].innerHTML.httpHtml();
+		}
 	}
 </script>
+<style type="text/css">
+</style>
 <style type="text/css">
 pre {
 white-space: pre-wrap;
 word-wrap: break-word;
 }
 </style>
-<body id="activity-detail" class="zh_CN " onload="hiddenDiv()" style="background-color: black;">
+<body id="activity-detail" class="zh_CN " onload="replaceHTTP()" style="background-color: black;">
 	<div class="rich_media " style="">
-		<!-- <div id="div1" class="div1"></div>
-		<div id="bg" class="bg"></div> -->
 		<div style="padding: 2px;padding-top:4px;">
 		<div style="padding: 2px;background-color: #DCD5C2;border-radius: 8px;">
 		<div class="rich_media_inner" style="border-radius: 8px;padding-left: 2px; padding-right: 2px;">
