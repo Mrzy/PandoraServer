@@ -201,11 +201,11 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 		SimpleDateFormat dfl = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		sql.append("select id,title,url,imgUrl,data_type,collect_website,release_time,top,step,collect_time,news_type,data_sub,type,userid from (select id,title,url,imgUrl,data_type,collect_website,release_time,top,step,collect_time,news_type,data_sub,type,userid from data_img_table where 1=1 ");
 		if (filterMap != null && !filterMap.isEmpty()) {
-			if (!"".equals(filterMap.get("dataType"))
-					&& filterMap.get("dataType") != null
-					&& !"''".equals(filterMap.get("dataType"))
-					&& !"null".equals(filterMap.get("dataType"))) {
-				sql.append(" and type = '"+filterMap.get("dataType")+"' ");
+			if (!"".equals(filterMap.get("type"))
+					&& filterMap.get("type") != null
+					&& !"''".equals(filterMap.get("type"))
+					&& !"null".equals(filterMap.get("type"))) {
+				sql.append(" and type = '"+filterMap.get("type")+"' ");
 			}
 			if(!"0".equals(filterMap.get("lastModified"))){
 				sql.append(" and collect_time < '" + dfl.format(lastModified)+ "'  ");

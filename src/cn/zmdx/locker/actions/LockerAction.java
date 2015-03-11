@@ -222,7 +222,7 @@ public class LockerAction extends ActionSupport implements
 		ServletActionContext.getResponse().setHeader("Cache-Control", "max-age=300");
 		PrintWriter out = ServletActionContext.getResponse().getWriter();
 		//数据类别:1头条,2八卦,3微精选,4美女,5搞笑
-		String dataType = ServletActionContext.getRequest().getParameter("dataType");
+		String type = ServletActionContext.getRequest().getParameter("type");
 		//lastModified
 		String lastModified = ServletActionContext.getRequest().getParameter("lastModified");
 		//查询数据数量
@@ -236,7 +236,7 @@ public class LockerAction extends ActionSupport implements
 		}
 		Map<String, String> filterMap = new HashMap();
 		filterMap.put("limit", limit);
-		filterMap.put("dataType", dataType);
+		filterMap.put("dataType", type);
 		filterMap.put("lastModified", lastModified);
 		try {
 			List<Data_img_table> list = lockerService
