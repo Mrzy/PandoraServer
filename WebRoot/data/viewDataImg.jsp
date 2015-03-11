@@ -53,6 +53,9 @@
 	}
 </script>
 <style type="text/css">
+img{
+	width: 100%;
+}
 </style>
 <style type="text/css">
 pre {
@@ -79,10 +82,10 @@ word-wrap: break-word;
 						<c:forEach items="${list }" var="obj" varStatus="vs">
 							<c:if test="${vs.count==1 }">
 								<p style="text-align: center;margin-top: 10px;">
-									<img alt="" src="${obj[1] }" style="width: 100%;">
+									<img alt="" src="${dataImgTable.url}" style="width: 100%;">
 								</p>
 								<p style="text-align: right;font-size: 12px;">
-								<img alt="" src="<%=request.getContextPath()%>/data/images/eye.png">
+								<img alt="" src="<%=request.getContextPath()%>/data/images/eye.png" style="width: 14px">
 								<span>${dataImgTable.views}</span>
 								</p>
 								<h2 class="rich_media_title"
