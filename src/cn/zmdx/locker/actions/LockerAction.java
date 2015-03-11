@@ -236,7 +236,7 @@ public class LockerAction extends ActionSupport implements
 		}
 		Map<String, String> filterMap = new HashMap();
 		filterMap.put("limit", limit);
-		filterMap.put("dataType", type);
+		filterMap.put("type", type);
 		filterMap.put("lastModified", lastModified);
 		try {
 			List<Data_img_table> list = lockerService
