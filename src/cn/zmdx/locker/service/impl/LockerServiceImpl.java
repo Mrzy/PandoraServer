@@ -53,4 +53,15 @@ public class LockerServiceImpl implements LockerService {
 		lockerDAO.addViews(id);
 	}
 
+	@Override
+	public List<Data_img_table> queryDataImgTableNew(
+			Map<String, String> filterMap) {
+		return lockerDAO.queryDataImgTableNew(filterMap);
+	}
+	
+	@Override
+	public List<WallPaper> queryWallPaperNew(Map<String, String> filterMap) {
+		return lockerDAO.queryWallPaperNew(filterMap);
+	}
+
 }

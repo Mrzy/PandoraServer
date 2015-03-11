@@ -17,6 +17,10 @@ public class Data_img_table {
 	private String data_type;
 	private int views;
 	private int data_view;
+	private String news_type;
+	private int data_sub;
+	private String type;
+	private int userid;
 	
 	public int getId() {
 		return id;
@@ -89,6 +93,30 @@ public class Data_img_table {
 	}
 	public void setData_view(int data_view) {
 		this.data_view = data_view;
+	}
+	public String getNews_type() {
+		return news_type;
+	}
+	public void setNews_type(String news_type) {
+		this.news_type = news_type;
+	}
+	public int getData_sub() {
+		return data_sub;
+	}
+	public void setData_sub(int data_sub) {
+		this.data_sub = data_sub;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 	
 }

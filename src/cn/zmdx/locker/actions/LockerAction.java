@@ -209,4 +209,90 @@ public class LockerAction extends ActionSupport implements
 		out.flush();
 		out.close();
 	}
+	
+	/**
+	 * 新版本的图片数据查询（1.5.2版后）
+	 * @author louxiaojian
+	 * @date： 日期：2015-3-9 时间：上午11:45:29
+	 * @throws IOException
+	 */
+	public void queryDataImgTableNew() throws IOException {
+		ServletActionContext.getResponse().setContentType(
+				"text/json; charset=utf-8");
+		ServletActionContext.getResponse().setHeader("Cache-Control", "max-age=300");
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		//数据类别:1头条,2八卦,3微精选,4美女,5搞笑
+		String dataType = ServletActionContext.getRequest().getParameter("dataType");
+		//lastModified
+		String lastModified = ServletActionContext.getRequest().getParameter("lastModified");
+		//查询数据数量
+		String limit=ServletActionContext.getRequest().getParameter("limit");
+		if (null == lastModified || "".equals(lastModified)
+				|| "null".equals(lastModified)) {
+			lastModified = "0";
+		}
+		if ("".equals(limit)||limit==null|| "0".equals(limit)){
+			limit = "20";
+		}
+		Map<String, String> filterMap = new HashMap();
+		filterMap.put("limit", limit);
+		filterMap.put("dataType", dataType);
+		filterMap.put("lastModified", lastModified);
+		try {
+			List<Data_img_table> list = lockerService
+					.queryDataImgTableNew(filterMap);
+			if (null != list && list.size() > 0)
+				out.print("{\"state\":\"success\",\"data\":"
+						+ JSON.toJSONString(list, true) + "}");
+			else
+				out.print("{\"state\":\"null\"}");
+		} catch (Exception e) {
+			out.print("{\"state\":\"error\"}");
+			logger.error(e);
+			e.printStackTrace();
+		}
+		out.flush();
+		out.close();
+	}
+	
+	/**
+	 * 新版本的壁纸数据查询（1.5.2版后）
+	 * @author louxiaojian
+	 * @date： 日期：2015-3-9 时间：下午4:36:09
+	 * @throws IOException
+	 */
+	public void queryWallPaperNew() throws IOException {
+		ServletActionContext.getResponse().setContentType(
+				"text/json; charset=utf-8");
+		ServletActionContext.getResponse().setHeader("Cache-Control", "max-age=21600");
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		String lastModified = ServletActionContext.getRequest().getParameter("lastModified");
+		//查询数据数量
+		String limit=ServletActionContext.getRequest().getParameter("limit");
+		if (null == lastModified || "".equals(lastModified)
+				|| "null".equals(lastModified)) {
+			lastModified = "0";
+		}
+		if (null == limit || "".equals(limit)
+				|| "null".equals(limit)|| "0".equals(limit)) {
+			limit = "15";
+		}
+		Map<String, String> filterMap = new HashMap();
+		filterMap.put("lastModified", lastModified);
+		filterMap.put("limit", limit);
+		try {
+			List<WallPaper> list = lockerService.queryWallPaperNew(filterMap);
+			if (null != list && list.size() > 0)
+				out.print("{\"state\":\"success\",\"data\":"
+						+ JSON.toJSONString(list, true) + "}");
+			else
+				out.print("{\"state\":\"null\"}");
+		} catch (Exception e) {
+			out.print("{\"state\":\"error\"}");
+			logger.error(e);
+			e.printStackTrace();
+		}
+		out.flush();
+		out.close();
+	}
 }

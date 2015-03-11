@@ -1,5 +1,6 @@
 package cn.zmdx.locker.dao.interfaces;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -54,5 +55,22 @@ public interface LockerDAO extends ParentDAO {
     * @return
     */
    public void addViews(String id);
+
+   /**
+    * 新版本的图片数据查询（1.5.2版后）
+    * @author louxiaojian
+    * @date： 日期：2015-3-9 时间：下午12:00:33
+    * @param filterMap
+    * @return
+    */
+   public List<Data_img_table> queryDataImgTableNew(Map<String, String> filterMap);
+
+   /**
+	 * 新版本的壁纸数据查询（1.5.2版后）
+	 * @author louxiaojian
+	 * @date： 日期：2015-3-9 时间：下午4:36:09
+	 * @throws IOException
+	 */
+   public List<WallPaper> queryWallPaperNew(Map<String, String> filterMap);
 	
 }
