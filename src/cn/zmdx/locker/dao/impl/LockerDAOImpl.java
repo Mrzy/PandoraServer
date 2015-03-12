@@ -216,6 +216,9 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 					sql.append(" and collect_time < '" + dfl.format(lastModified)+ "'  ");
 				}
 			}
+			if("0".equals(filterMap.get("lastModified"))){
+				sql.append(" and collect_time < '" + dfl.format(date) + "' ");
+			}
 			sql.append(" order by collect_time desc limit "+Integer.parseInt(filterMap.get("limit"))+" ) t  ");
 		}
 		//将返回结果映射到具体的类。可以是实体类，也可以是普通的pojo类
@@ -235,6 +238,8 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 		if (filterMap != null && !filterMap.isEmpty()) {
 			if(!"0".equals(filterMap.get("lastModified"))){
 				sql.append(" and publishDATE < '"+dfl.format(lastModified)+"'");
+			}else{
+				sql.append(" and publishDATE < '"+dfl.format(date)+"'");
 			}
 			sql.append(" order by publishDATE desc ");
 		}
@@ -243,6 +248,22 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 			query.setMaxResults(Integer.parseInt(filterMap.get("limit")));
 		}
 		return query.list();
+	}
+
+	@Override
+	public int addDataImgTableTop(String id) {
+		Data_img_table dit=(Data_img_table)getSession().get(Data_img_table.class, Integer.parseInt(id));
+		dit.setTop(dit.getTop()+1);
+		getSession().update(dit);
+		return dit.getTop();
+	}
+
+	@Override
+	public int addWallPaperTop(String id) {
+		WallPaper wp=(WallPaper)getSession().get(WallPaper.class, Integer.parseInt(id));
+		wp.setTop(wp.getTop()+1);
+		getSession().update(wp);
+		return wp.getTop();
 	}
 
 }

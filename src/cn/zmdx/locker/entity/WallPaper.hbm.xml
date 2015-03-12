@@ -13,6 +13,7 @@
 		<property name="imageNAME" column="imageNAME" />
 		<property name="imageEXT" column="imageEXT" />
 		<property name="publishDATE" column="publishDATE" />
+		<property name="top" column="top" />
 	</class>
 
 </hibernate-mapping>

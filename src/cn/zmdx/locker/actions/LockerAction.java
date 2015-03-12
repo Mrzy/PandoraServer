@@ -298,4 +298,50 @@ public class LockerAction extends ActionSupport implements
 		out.flush();
 		out.close();
 	}
+	
+	/**
+	 * 新闻数据点赞
+	 * @author louxiaojian
+	 * @date： 日期：2015-3-12 时间：上午11:21:25
+	 * @throws IOException
+	 */
+	public void addDataImgTableTop() throws IOException {
+		ServletActionContext.getResponse().setContentType(
+				"text/json; charset=utf-8");
+		String id = ServletActionContext.getRequest().getParameter("id");
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		try {
+			int top=lockerService.addDataImgTableTop(id);
+			out.print("{\"state\":\"success\",\"top\":"+top+"}");
+		} catch (Exception e) {
+			out.print("{\"state\":\"error\"}");
+			logger.error(e);
+			e.printStackTrace();
+		}
+		out.flush();
+		out.close();
+	}
+	
+	/**
+	 * 壁纸数据点赞
+	 * @author louxiaojian
+	 * @date： 日期：2015-3-12 时间：上午11:21:25
+	 * @throws IOException
+	 */
+	public void addWallPaperTop() throws IOException {
+		ServletActionContext.getResponse().setContentType(
+				"text/json; charset=utf-8");
+		String id = ServletActionContext.getRequest().getParameter("id");
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		try {
+			int top=lockerService.addWallPaperTop(id);
+			out.print("{\"state\":\"success\",\"top\":"+top+"}");
+		} catch (Exception e) {
+			out.print("{\"state\":\"error\"}");
+			logger.error(e);
+			e.printStackTrace();
+		}
+		out.flush();
+		out.close();
+	}
 }

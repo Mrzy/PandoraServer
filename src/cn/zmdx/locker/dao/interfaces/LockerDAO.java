@@ -72,5 +72,23 @@ public interface LockerDAO extends ParentDAO {
 	 * @throws IOException
 	 */
    public List<WallPaper> queryWallPaperNew(Map<String, String> filterMap);
+   
+   /**
+    * 新闻数据点赞
+    * @author louxiaojian
+    * @date： 日期：2015-3-12 时间：上午11:25:30
+    * @param id
+    * return 返回top值
+    */
+   public int addDataImgTableTop(String id);
+   
+   /**
+    * 壁纸数据点赞
+    * @author louxiaojian
+    * @date： 日期：2015-3-12 时间：上午11:25:24
+    * @param id
+    * return 返回top值
+    */
+   public int addWallPaperTop(String id);
 	
 }

@@ -13,6 +13,7 @@ public class WallPaper {
 	private String imageNAME;
 	private String imageEXT;
 	private Timestamp publishDATE;
+	private int top;
 
 	public int getId() {
 		return id;
@@ -84,6 +85,14 @@ public class WallPaper {
 
 	public void setPublishDATE(Timestamp publishDATE) {
 		this.publishDATE = publishDATE;
+	}
+
+	public int getTop() {
+		return top;
+	}
+
+	public void setTop(int top) {
+		this.top = top;
 	}
 
 }
