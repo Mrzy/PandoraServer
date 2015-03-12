@@ -56,11 +56,13 @@
 img{
 	width: 100%;
 }
-</style>
-<style type="text/css">
-pre {
-white-space: pre-wrap;
-word-wrap: break-word;
+p{ 
+	padding:0 0;
+	margin:0 0;
+} 
+pre{
+	white-space: pre-wrap;
+	word-wrap: break-word;
 }
 </style>
 <body id="activity-detail" class="zh_CN " style="background-color: black;">
