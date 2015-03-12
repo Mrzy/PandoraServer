@@ -207,8 +207,14 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 					&& !"null".equals(filterMap.get("type"))) {
 				sql.append(" and type = '"+filterMap.get("type")+"' ");
 			}
-			if(!"0".equals(filterMap.get("lastModified"))){
-				sql.append(" and collect_time < '" + dfl.format(lastModified)+ "'  ");
+			if("0".equals(filterMap.get("flag"))){
+				if(!"0".equals(filterMap.get("lastModified"))){
+					sql.append(" and collect_time > '" + dfl.format(lastModified)+ "'  ");
+				}
+			}else if("1".equals(filterMap.get("flag"))){
+				if(!"0".equals(filterMap.get("lastModified"))){
+					sql.append(" and collect_time < '" + dfl.format(lastModified)+ "'  ");
+				}
 			}
 			sql.append(" order by collect_time desc limit "+Integer.parseInt(filterMap.get("limit"))+" ) t  ");
 		}

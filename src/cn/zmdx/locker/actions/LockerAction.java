@@ -227,6 +227,8 @@ public class LockerAction extends ActionSupport implements
 		String lastModified = ServletActionContext.getRequest().getParameter("lastModified");
 		//查询数据数量
 		String limit=ServletActionContext.getRequest().getParameter("limit");
+		//标示，0查询lastModified之后的数据，1查询lastModified之前的数据
+		String flag=ServletActionContext.getRequest().getParameter("flag");
 		if (null == lastModified || "".equals(lastModified)
 				|| "null".equals(lastModified)) {
 			lastModified = "0";
@@ -238,6 +240,7 @@ public class LockerAction extends ActionSupport implements
 		filterMap.put("limit", limit);
 		filterMap.put("type", type);
 		filterMap.put("lastModified", lastModified);
+		filterMap.put("flag", flag);
 		try {
 			List<Data_img_table> list = lockerService
 					.queryDataImgTableNew(filterMap);
