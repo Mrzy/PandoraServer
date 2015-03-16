@@ -65,7 +65,7 @@ pre{
 	word-wrap: break-word;
 }
 </style>
-<body id="activity-detail" class="zh_CN " style="background-color: black;">
+<body id="activity-detail" class="zh_CN " onload="addViews()" style="background-color: black;">
 	<div class="rich_media " style="">
 		<div style="padding: 2px;padding-top:4px;">
 		<div style="padding: 2px;background-color: #DCD5C2;border-radius: 8px;">
