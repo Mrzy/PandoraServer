@@ -53,17 +53,6 @@
 	}
 </script>
 <style type="text/css">
-img{
-	width: 100%;
-}
-p{ 
-	padding:0 0;
-	margin:0 0;
-} 
-pre{
-	white-space: pre-wrap;
-	word-wrap: break-word;
-}
 </style>
 <body id="activity-detail" class="zh_CN " onload="addViews()" style="background-color: black;">
 	<div class="rich_media " style="">
@@ -80,7 +69,7 @@ pre{
 			</div>
 			<div id="page-content" style="clear: both;">
 				<div id="img-content">
-					<div class="rich_media_content" id="js_content">
+					<div class="rich_media_content" id="js_content" style="word-wrap: break-word;word-break:break-all;">
 						<c:forEach items="${list }" var="obj" varStatus="vs">
 							<c:if test="${vs.count==1 }">
 								<p style="text-align: center;margin-top: 10px;">
@@ -95,7 +84,7 @@ pre{
 									id="activity-name">${dataImgTable.title }</h2>
 								<p style="margin-top: 12px;padding-left: 7px;">
 									<span
-										style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;padding-top: 100px;"><pre>${obj[2]}</pre></span>
+										style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;padding-top: 100px;">${obj[2]}</span>
 								</p>
 							</c:if>
 							<c:if test="${vs.count!=1 }">
@@ -105,7 +94,7 @@ pre{
 								</p>
 								<p style="margin-top: 7px;padding-left: 7px;">
 									<span
-										style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;"><pre>${obj[2]}</pre></span>
+										style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;">${obj[2]}</span>
 								</p>
 							</c:if>
 						</c:forEach>
