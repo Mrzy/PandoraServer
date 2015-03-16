@@ -54,33 +54,30 @@
 </script>
 <style type="text/css">
 </style>
-<body id="activity-detail" class="zh_CN " onload="addViews()" style="background-color: black;">
-	<div class="rich_media " style="">
-		<div style="padding: 2px;padding-top:4px;">
-		<div style="padding: 2px;background-color: #DCD5C2;border-radius: 8px;">
-		<div class="rich_media_inner" style="border-radius: 8px;">
+<body id="activity-detail" class="zh_CN " onload="addViews()" style="background-color: #E7E8EB;">
+	<div class="rich_media">
+		<div class="rich_media_inner">
 			<div class="rich_media_meta_list" style="text-align: left;">
-				<font color="#9b9b9b" style="padding-left: 2px;"> <c:forEach
+				<!-- <font color="#9b9b9b" style="padding-left: 2px;"> <c:forEach
 						items="${taglist }" var="tag" varStatus="vss">
 		    			${tag[1] }<c:if test="${fn:length(taglist)!=vss.count }">,</c:if>
-					</c:forEach>
-					<p style="float: right;">&nbsp;&nbsp;&nbsp;&nbsp;来自： <a class="rich_media_meta link nickname" href="javascript:void(0);" id="post-user">${dataImgTable.collect_website }</a>
-					</p> </font>
+					</c:forEach> -->
+					<p style="float: left;color: black;">来   源：${dataImgTable.collect_website } </p> 
+					<p style="text-align: right;font-size: 12px;">
+						<img alt="" src="<%=request.getContextPath()%>/data/images/eye.png" style="width: 14px">
+						<span style="color: black;">${dataImgTable.views}</span>
+					</p>
 			</div>
 			<div id="page-content" style="clear: both;">
 				<div id="img-content">
 					<div class="rich_media_content" id="js_content" style="word-wrap: break-word;word-break:break-all;">
 						<c:forEach items="${list }" var="obj" varStatus="vs">
 							<c:if test="${vs.count==1 }">
-								<p style="text-align: center;margin-top: 10px;">
+								<!-- <p style="text-align: center;margin-top: 10px;">
 									<img alt="" src="${dataImgTable.url}" style="width: 100%;">
-								</p>
-								<p style="text-align: right;font-size: 12px;">
-								<img alt="" src="<%=request.getContextPath()%>/data/images/eye.png" style="width: 14px">
-								<span>${dataImgTable.views}</span>
-								</p>
+								</p> -->
 								<h2 class="rich_media_title"
-									style="text-align: center;margin-top: 15px;color: #7e695b;padding-left: 25px;padding-right: 30px;line-height: 30px;"
+									style="text-align: center;margin-top: 50px;color: #7e695b;padding-left: 25px;padding-right: 30px;line-height: 30px;"
 									id="activity-name">${dataImgTable.title }</h2>
 								<p style="margin-top: 12px;padding-left: 7px;">
 									<span
@@ -102,8 +99,6 @@
 				<div style="height: 24px;"></div>
 			</div>
 		 	</div>
-		</div>
-		</div>
 		</div>
 	</div>
 </body>
