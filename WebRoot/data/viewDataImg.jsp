@@ -55,7 +55,7 @@
 </script>
 <body id="activity-detail" class="zh_CN " onload="addViews()">
 	<div class="rich_media">
-	<div id="title" class="rich_media_meta_list" style="text-align: left;width: 100%;background-color: 
+	<div id="title" class="rich_media_meta_list" style="text-align: left;width: 100%;height:30%;background-color: 
 	<%
 	if(request.getAttribute("dataImgTable")!=null&&!"".equals(request.getAttribute("dataImgTable"))){
 		Data_img_table dataImgTable=(Data_img_table)request.getAttribute("dataImgTable");
@@ -72,10 +72,10 @@
 						items="${taglist }" var="tag" varStatus="vss">
 		    			${tag[1] }<c:if test="${fn:length(taglist)!=vss.count }">,</c:if>
 					</c:forEach> -->
-					<p class="rich_media_title" style="text-align: left;color: #ffffff;padding-left: 15px;padding-right: 15px;padding-top: 25px;line-height: 34px;"
+					<p class="rich_media_title" style="text-align: left;color: #ffffff;padding-left: 15px;padding-right: 15px;padding-top: 25px;line-height: 34px;padding-bottom: 15px;"
 									id="activity-name">${dataImgTable.title }</p>
-					<p style="float: left;margin-top:30px;color: #fff;padding-left: 17px;font-size: 12px;">${dataImgTable.collect_website } </p> 
-					<p style="text-align: right;font-size: 12px;padding-top:30px;color: #fff;padding-right: 15px;">
+					<p style="float: left;margin-top:-2px;color: #fff;padding-left: 17px;font-size: 12px;padding-bottom: 5px;">${dataImgTable.collect_website } </p> 
+					<p style="text-align: right;font-size: 12px;margin-top:-2px;color: #fff;padding-right: 15px;padding-bottom: 5px;">
 						<img alt="" src="<%=request.getContextPath()%>/data/images/eye.png" style="width: 16px;margin-bottom: -1.2px;">
 						<span style="color: #fff;padding-left: 3px;">${dataImgTable.views}</span>
 					</p>
