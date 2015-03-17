@@ -1,11 +1,11 @@
 html {
 	color: #000;
-	font: 16px/1.8 "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+	font: 16px/1.8 "Helvetica Neue",Helvetica,"STXihei","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 	-webkit-font-smoothing: antialiased;
 }
 
 body {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	/*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
 	font-size: 13px;
 	color: #fff;
 	background-color: #fff;
@@ -46,7 +46,7 @@ a {
 }
 
 .rich_media_inner {
-	padding: 15px 10px;
+/*	padding: 15px 10px;*/
 /* 	background-image: url(images/background.png); */
 	background-size:100% 100%;
 	/*position:absolute;*/
@@ -56,8 +56,8 @@ a {
 
 .rich_media_title {
 	line-height: 21px;
-	font-weight: 700;
-	font-size: 22px;
+	font-weight: 70;
+	font-size: 26px;
 	word-wrap: break-word;
 	-webkit-hyphens: auto;
 	-ms-hyphens: auto;
@@ -813,4 +813,27 @@ _top:       expression(eval(document.compatMode &&
             document.compatMode=='CSS1Compat') ?
             documentElement.scrollTop + (document.documentElement.clientHeight-this.offsetHeight)/2 :/*IE6*/
             document.body.scrollTop + (document.body.clientHeight - this.clientHeight)/2);/*IE5 IE5.5*/
-} 
+}
+.rich_media_meta_list{
+	height: 100px;
+}
+.rich_media_inner {
+		padding: 0px 10px 0px 10px;
+		border-top-width: 0
+}
+
+.color1{
+	background-color: #e85c4f;
+}
+.color2{
+	background-color: #26a69a;
+}
+.color3{
+	background-color: #4fa9e8;
+}
+.color4{
+	background-color: #9e4fe8;
+}
+.color5{
+	background-color: #e8894f;
+}

@@ -51,24 +51,40 @@
 			spans[i].innerHTML = spans[i].innerHTML.httpHtml();
 		}
 	}
+	function load(){
+		var id=${dataImgTable.id};
+		var num=id%5;
+		if(num==0){
+			document.getElementById("title").className='color1';
+		}else if(num==1){
+			document.getElementById("title").className='color2';
+		}else if(num==2){
+			document.getElementById("title").className='color3';
+		}else if(num==3){
+			document.getElementById("title").className='color4';
+		}else if(num==4){
+			document.getElementById("title").className='color5';
+		}
+		addViews()
+	}
 </script>
-<style type="text/css">
-</style>
-<body id="activity-detail" class="zh_CN " onload="addViews()">
+<body id="activity-detail" class="zh_CN " onload="load()">
 	<div class="rich_media">
-		<div class="rich_media_inner">
-			<div class="rich_media_meta_list" style="text-align: left;">
+	<div id="title" class="rich_media_meta_list" style="text-align: left;width: 100%;">
 				<!-- <font color="#9b9b9b" style="padding-left: 2px;"> <c:forEach
 						items="${taglist }" var="tag" varStatus="vss">
 		    			${tag[1] }<c:if test="${fn:length(taglist)!=vss.count }">,</c:if>
 					</c:forEach> -->
-					<p style="float: left;color: black;">来   源：${dataImgTable.collect_website } </p> 
-					<p style="text-align: right;font-size: 12px;">
-						<img alt="" src="<%=request.getContextPath()%>/data/images/eye.png" style="width: 14px">
-						<span style="color: black;">${dataImgTable.views}</span>
+					<p class="rich_media_title" style="text-align: left;color: #ffffff;padding-left: 15px;padding-right: 15px;padding-top: 25px;line-height: 34px;"
+									id="activity-name">${dataImgTable.title }</p>
+					<p style="float: left;margin-top:30px;color: #fff;padding-left: 17px;font-size: 12px;">${dataImgTable.collect_website } </p> 
+					<p style="text-align: right;font-size: 12px;padding-top:30px;color: #fff;padding-right: 15px;">
+						<img alt="" src="<%=request.getContextPath()%>/data/images/eye.png" style="width: 16px;margin-bottom: -1.2px;">
+						<span style="color: #fff;padding-left: 3px;">${dataImgTable.views}</span>
 					</p>
 			</div>
-			<div id="page-content" style="clear: both;">
+		<div class="rich_media_inner">
+			<div id="page-content">
 				<div id="img-content">
 					<div class="rich_media_content" id="js_content" style="word-wrap: break-word;word-break:break-all;">
 						<c:forEach items="${list }" var="obj" varStatus="vs">
@@ -76,10 +92,8 @@
 								<!-- <p style="text-align: center;margin-top: 10px;">
 									<img alt="" src="${dataImgTable.url}" style="width: 100%;">
 								</p> -->
-								<h2 class="rich_media_title"
-									style="text-align: center;margin-top: 50px;color: #7e695b;padding-left: 25px;padding-right: 30px;line-height: 30px;"
-									id="activity-name">${dataImgTable.title }</h2>
-								<p style="margin-top: 12px;padding-left: 7px;">
+								
+								<p style="margin-top: 12px;">
 									<span
 										style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;padding-top: 100px;">${obj[2]}</span>
 								</p>
@@ -89,7 +103,7 @@
 									<img style="text-align: left;width: 100%;margin-top: 20px;"
 										alt="" src="${obj[1] }">
 								</p>
-								<p style="margin-top: 7px;padding-left: 7px;">
+								<p style="margin-top: 7px;">
 									<span
 										style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;">${obj[2]}</span>
 								</p>
