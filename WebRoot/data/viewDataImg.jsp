@@ -54,7 +54,7 @@
 </script>
 <style type="text/css">
 </style>
-<body id="activity-detail" class="zh_CN " onload="addViews()" style="background-color: #E7E8EB;">
+<body id="activity-detail" class="zh_CN " onload="addViews()">
 	<div class="rich_media">
 		<div class="rich_media_inner">
 			<div class="rich_media_meta_list" style="text-align: left;">

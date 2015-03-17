@@ -8,6 +8,7 @@ body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 13px;
 	color: #fff;
+	background-color: #fff;
 }
 
 body,h1,h2,h3,h4,h5,p,ul,ol,dl,dd,fieldset,textarea {
@@ -174,7 +175,7 @@ a {
 	.rich_media_inner {
 		padding: 20px;
 /* 		background-color: #fff; */
-		border: 1px solid #d9dadc;
+/*		border: 1px solid #d9dadc; */
 		border-top-width: 0
 	}
 	.rich_media_meta {
