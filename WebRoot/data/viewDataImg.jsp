@@ -1,3 +1,4 @@
+<%@page import="cn.zmdx.locker.entity.Data_img_table"%>
 <%@ page language="java" contentType="text/html;charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -51,26 +52,22 @@
 			spans[i].innerHTML = spans[i].innerHTML.httpHtml();
 		}
 	}
-	function load(){
-		var id=${dataImgTable.id};
-		var num=id%5;
-		if(num==0){
-			document.getElementById("title").className='color1';
-		}else if(num==1){
-			document.getElementById("title").className='color2';
-		}else if(num==2){
-			document.getElementById("title").className='color3';
-		}else if(num==3){
-			document.getElementById("title").className='color4';
-		}else if(num==4){
-			document.getElementById("title").className='color5';
-		}
-		addViews()
-	}
 </script>
-<body id="activity-detail" class="zh_CN " onload="load()">
+<body id="activity-detail" class="zh_CN " onload="addViews()">
 	<div class="rich_media">
-	<div id="title" class="rich_media_meta_list" style="text-align: left;width: 100%;">
+	<div id="title" class="rich_media_meta_list" style="text-align: left;width: 100%;background-color: 
+	<%
+	if(request.getAttribute("dataImgTable")!=null&&!"".equals(request.getAttribute("dataImgTable"))){
+		Data_img_table dataImgTable=(Data_img_table)request.getAttribute("dataImgTable");
+		   switch(dataImgTable.getId()%5){
+		   case 0:%>#e85c4f<% break;
+		   case 1:%>#26a69a<% break;
+		   case 2:%>#4fa9e8<% break;
+		   case 3:%>#9e4fe8<% break;
+		   case 4:%>#e8894f<% break;
+		   }
+	}
+	%>">
 				<!-- <font color="#9b9b9b" style="padding-left: 2px;"> <c:forEach
 						items="${taglist }" var="tag" varStatus="vss">
 		    			${tag[1] }<c:if test="${fn:length(taglist)!=vss.count }">,</c:if>
