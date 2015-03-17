@@ -106,13 +106,13 @@ a {
 }
 
 .rich_media_content p {
-	text-indent: 2em;
+	/*text-indent: 2em;*/
 	margin: 0 0 20px;
 }
 
-.rich_media_content p img {
+/*.rich_media_content p img {
 	margin-left: -2em;
-}
+}*/
 
 
 .rich_media_content * {
