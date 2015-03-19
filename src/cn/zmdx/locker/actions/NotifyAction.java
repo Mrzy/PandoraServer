@@ -31,6 +31,7 @@ public class NotifyAction extends ActionSupport {
 	public void queryNotifyList() throws IOException {
 		ServletActionContext.getResponse().setContentType(
 				"text/json; charset=utf-8");
+		ServletActionContext.getResponse().setHeader("Cache-Control", "max-age=1800");
 		String flag = ServletActionContext.getRequest().getParameter("limit");
 		String lastModified = ServletActionContext.getRequest().getParameter(
 				"lastModified");
