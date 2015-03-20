@@ -22,6 +22,9 @@
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/data/jquery-1.7.2.min.js"></script>
 </head>
+<%
+	response.setHeader("Cache-Control","max-age=1800");
+%>
 <script type="text/javascript">
 	function addViews(){
 		var params = {"id": ${dataImgTable.id}};  
