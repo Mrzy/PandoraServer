@@ -210,7 +210,7 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 			if("0".equals(filterMap.get("flag"))){
 				if(!"0".equals(filterMap.get("lastModified"))){
 					sql.append(" and collect_time > '" + dfl.format(lastModified)+ "'  ");
-					sql.append(" and collect_time like '%" + df.format(date)+ "%'  ");
+					sql.append(" and collect_time < '" + dfl.format(date)+ "'  ");
 				}
 			}else if("1".equals(filterMap.get("flag"))){
 				if(!"0".equals(filterMap.get("lastModified"))){
