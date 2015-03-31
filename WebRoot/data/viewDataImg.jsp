@@ -27,7 +27,7 @@
 %>
 <script type="text/javascript">
 	function addViews(){
-		var params = {"id": ${dataImgTable.id}};  
+		var params = {"id": '${dataImgTable.id}'};  
 		var actionUrl = "<%=request.getContextPath()%>/locker!addViews.action";  
 		$.ajax({  
 			  url : actionUrl,  
@@ -55,8 +55,17 @@
 			spans[i].innerHTML = spans[i].innerHTML.httpHtml();
 		}
 	}
+	function closeDiv(){
+		document.getElementById("div1").style.display="none"
+	}
+	function downloadApp(){
+		window.location.href="http://fir.im/hdlocker";
+	}
 </script>
-<body id="activity-detail" class="zh_CN " onload="addViews()">
+ <style>
+
+</style>
+<body id="activity-detail" class="zh_CN " >
 	<div class="rich_media">
 	<div id="title" class="rich_media_meta_list" style="text-align: left;width: 100%;height:30%;background-color: 
 	<%
@@ -71,49 +80,50 @@
 		   }
 	}
 	%>">
-				<!-- <font color="#9b9b9b" style="padding-left: 2px;"> <c:forEach
-						items="${taglist }" var="tag" varStatus="vss">
-		    			${tag[1] }<c:if test="${fn:length(taglist)!=vss.count }">,</c:if>
-					</c:forEach> -->
-					<p class="rich_media_title" style="text-align: left;color: #ffffff;padding-left: 15px;padding-right: 15px;padding-top: 25px;line-height: 34px;padding-bottom: 15px;"
-									id="activity-name">${dataImgTable.title }</p>
-					<p style="float: left;margin-top:-2px;color: #fff;padding-left: 17px;font-size: 12px;padding-bottom: 5px;">${dataImgTable.collect_website } </p> 
-					<p style="text-align: right;font-size: 12px;margin-top:-2px;color: #fff;padding-right: 15px;padding-bottom: 5px;">
-						<img alt="" src="<%=request.getContextPath()%>/data/images/eye.png" style="width: 16px;margin-bottom: -1.2px;">
-						<span style="color: #fff;padding-left: 3px;">${dataImgTable.views}</span>
-					</p>
-			</div>
-		<div class="rich_media_inner">
-			<div id="page-content">
-				<div id="img-content">
-					<div class="rich_media_content" id="js_content" style="word-wrap: break-word;word-break:break-all;">
-						<c:forEach items="${list }" var="obj" varStatus="vs">
-							<c:if test="${vs.count==1 }">
-								<!-- <p style="text-align: center;margin-top: 10px;">
-									<img alt="" src="${dataImgTable.url}" style="width: 100%;">
-								</p> -->
-								
-								<p style="margin-top: 12px;">
-									<span
-										style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;padding-top: 100px;">${obj[2]}</span>
-								</p>
-							</c:if>
-							<c:if test="${vs.count!=1 }">
-								<p style="text-align: center;margin-top: 12px;">
-									<img style="text-align: left;width: 100%;margin-top: 20px;"
-										alt="" src="${obj[1] }">
-								</p>
-								<p style="margin-top: 7px;">
-									<span
-										style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;">${obj[2]}</span>
-								</p>
-							</c:if>
-						</c:forEach>
-					</div>
-				<div style="height: 24px;"></div>
-			</div>
-		 	</div>
+		<p class="rich_media_title" style="text-align: left;color: #ffffff;padding-left: 15px;padding-right: 15px;padding-top: 25px;line-height: 34px;padding-bottom: 15px;"
+						id="activity-name">${dataImgTable.title }</p>
+		<p style="float: left;margin-top:-2px;color: #fff;padding-left: 17px;font-size: 12px;padding-bottom: 5px;">${dataImgTable.collect_website } </p> 
+		<p style="text-align: right;font-size: 12px;margin-top:-2px;color: #fff;padding-right: 15px;padding-bottom: 5px;">
+			<img alt="" src="<%=request.getContextPath()%>/data/images/eye.png" style="width: 16px;margin-bottom: -1.2px;">
+			<span style="color: #fff;padding-left: 3px;">${dataImgTable.views}</span>
+		</p>
+	</div>
+	<div class="rich_media_inner">
+		<div id="page-content">
+			<div id="img-content">
+				<div class="rich_media_content" id="js_content" style="word-wrap: break-word;word-break:break-all;">
+					<c:forEach items="${list }" var="obj" varStatus="vs">
+						<c:if test="${vs.count==1 }">
+							<p style="margin-top: 12px;">
+								<span
+									style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;padding-top: 100px;">${obj[2]}</span>
+							</p>
+						</c:if>
+					</c:forEach>
+				</div>
+			<div style="height: 64px;"></div>
 		</div>
+	 	</div>
+	</div>
+	<c:if test="${from!='pandora' }">
+		<div id="div1" class="bottomDiv">
+			<div style="width: 740px;margin-left: auto;margin-right: auto;">
+				<table style="width: 100%;">
+					<tr>
+						<td align="left" style="border: 0;width: 45px"><img alt="" style="height: 50px;margin-top:0px;" src="<%=request.getContextPath()%>/data/images/logo.png"></td>
+						<td align="left" style="border: 0;width: 130px;"><span style="font-size: 18px;padding-top: 60px;line-height: 10px;height: 18px;">潘多拉锁屏</span>
+							<br>
+							<span style="font-size: 12px;">全网&nbsp;<img alt="" src="data/images/boom.png" style="width: 20px;margin-bottom: -6px;">&nbsp;点&nbsp;&nbsp;&nbsp;一步到位</span>
+						</td>
+						<td align="left" style="border: 0;width: 505px">
+							<img alt="" src="<%=request.getContextPath()%>/data/images/image.png" style="width: 80px;margin-left: 20px;margin-bottom: 5px;" onclick="downloadApp();">
+							<img alt="" src="<%=request.getContextPath()%>/data/images/close.png" style="width: 18px;margin-left: 8px;margin-bottom: 25px;" onclick="closeDiv();">
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</c:if>
 	</div>
 </body>
 </html>

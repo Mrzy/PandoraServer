@@ -137,6 +137,7 @@ public class LockerAction extends ActionSupport implements
 				"text/json; charset=utf-8");
 		// 获取id
 		String id = ServletActionContext.getRequest().getParameter("id");
+		String from = ServletActionContext.getRequest().getParameter("from");
 		Map<String, String> filterMap = new HashMap();
 		filterMap.put("id", id);
 		// 根据id查询相关的图文信息
@@ -151,7 +152,7 @@ public class LockerAction extends ActionSupport implements
 		// }
 		// 根据id获取DataImgTable对象
 		Data_img_table dataImgTable = lockerService.getDataImgTableById(id);
-		// ServletActionContext.getRequest().setAttribute("sb", sb);
+		ServletActionContext.getRequest().setAttribute("from", from);
 		ServletActionContext.getRequest().setAttribute("list", list);
 		ServletActionContext.getRequest().setAttribute("taglist", taglist);
 		ServletActionContext.getRequest().setAttribute("dataImgTable",
