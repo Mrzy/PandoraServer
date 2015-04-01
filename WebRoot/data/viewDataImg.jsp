@@ -65,7 +65,7 @@
  <style>
 
 </style>
-<body id="activity-detail" class="zh_CN " >
+<body id="activity-detail" class="zh_CN " onload="addViews()">
 	<div class="rich_media">
 	<div id="title" class="rich_media_meta_list" style="text-align: left;width: 100%;height:30%;background-color: 
 	<%
