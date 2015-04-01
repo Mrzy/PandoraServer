@@ -110,14 +110,14 @@
 			<div style="width: 740px;margin-left: auto;margin-right: auto;">
 				<table style="width: 100%;">
 					<tr>
-						<td align="left" style="border: 0;width: 45px"><img alt="" style="height: 50px;margin-top:0px;" src="<%=request.getContextPath()%>/data/images/logo.png"></td>
-						<td align="left" style="border: 0;width: 130px;"><span style="font-size: 18px;padding-top: 60px;line-height: 10px;height: 18px;">潘多拉锁屏</span>
-							<br>
-							<span style="font-size: 12px;">全网&nbsp;<img alt="" src="data/images/boom.png" style="width: 20px;margin-bottom: -6px;">&nbsp;点&nbsp;&nbsp;&nbsp;一步到位</span>
+						<td align="left" style="border: 0;width: 37px"><img alt="" style="height: 40px;margin-top:5px;" src="<%=request.getContextPath()%>/data/images/logo.png"></td>
+						<td align="left" style="border: 0;width: 130px; padding-top: 2px;">
+							<div style="font-size: 15px;">潘多拉锁屏</div>
+							<div style="font-size: 12px;">全网&nbsp;<img alt="" src="data/images/boom.png" style="width: 20px;margin-bottom: -6px;">&nbsp;点&nbsp;&nbsp;&nbsp;一步到位</div>
 						</td>
 						<td align="left" style="border: 0;width: 505px">
-							<img alt="" src="<%=request.getContextPath()%>/data/images/image.png" style="width: 80px;margin-left: 20px;margin-bottom: 5px;" onclick="downloadApp();">
-							<img alt="" src="<%=request.getContextPath()%>/data/images/close.png" style="width: 18px;margin-left: 8px;margin-bottom: 25px;" onclick="closeDiv();">
+							<img alt="" src="<%=request.getContextPath()%>/data/images/image.png" style="width: 70px;margin-left: 28px;margin-bottom: 5px;" onclick="downloadApp();">
+							<img alt="" src="<%=request.getContextPath()%>/data/images/close.png" style="width: 18px;margin-left: 10px;margin-bottom: 25px;" onclick="closeDiv();">
 						</td>
 					</tr>
 				</table>
