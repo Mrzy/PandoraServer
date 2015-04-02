@@ -268,11 +268,14 @@ public class LockerAction extends ActionSupport implements
 	public void queryWallPaperNew() throws IOException {
 		ServletActionContext.getResponse().setContentType(
 				"text/json; charset=utf-8");
-		ServletActionContext.getResponse().setHeader("Cache-Control", "max-age=21600");
+		ServletActionContext.getResponse().setHeader("Cache-Control", "max-age=10800");
 		PrintWriter out = ServletActionContext.getResponse().getWriter();
 		String lastModified = ServletActionContext.getRequest().getParameter("lastModified");
 		//查询数据数量
 		String limit=ServletActionContext.getRequest().getParameter("limit");
+		//标示，0查询lastModified之后的数据，1查询lastModified之前的数据
+		String flag=ServletActionContext.getRequest().getParameter("flag");
+		String isDebug=ServletActionContext.getRequest().getParameter("isDebug");
 		if (null == lastModified || "".equals(lastModified)
 				|| "null".equals(lastModified)) {
 			lastModified = "0";
@@ -284,6 +287,8 @@ public class LockerAction extends ActionSupport implements
 		Map<String, String> filterMap = new HashMap();
 		filterMap.put("lastModified", lastModified);
 		filterMap.put("limit", limit);
+		filterMap.put("flag", flag);
+		filterMap.put("isDebug", isDebug);
 		try {
 			List<WallPaper> list = lockerService.queryWallPaperNew(filterMap);
 			if (null != list && list.size() > 0)

@@ -238,7 +238,14 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 		//sql.append(" and publishDATE <=  '" + dfl.format(date) + "'  ");
 		if (filterMap != null && !filterMap.isEmpty()) {
 			if(!"0".equals(filterMap.get("lastModified"))){
-				sql.append(" and publishDATE < '"+dfl.format(lastModified)+"'");
+				if("0".equals(filterMap.get("flag"))){
+					sql.append(" and publishDATE > '"+dfl.format(lastModified)+"'");
+					if(!"true".equals(filterMap.get("isDebug"))){
+						sql.append(" and publishDATE < '"+dfl.format(date)+"'");
+					}
+				}else{
+					sql.append(" and publishDATE < '"+dfl.format(lastModified)+"'");
+				}
 			}else{
 				sql.append(" and publishDATE < '"+dfl.format(date)+"'");
 			}
