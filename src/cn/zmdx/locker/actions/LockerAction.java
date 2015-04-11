@@ -138,21 +138,17 @@ public class LockerAction extends ActionSupport implements
 		// 获取id
 		String id = ServletActionContext.getRequest().getParameter("id");
 		String from = ServletActionContext.getRequest().getParameter("from");
+		String theme = ServletActionContext.getRequest().getParameter("theme");//night 夜间模式
 		Map<String, String> filterMap = new HashMap();
 		filterMap.put("id", id);
 		// 根据id查询相关的图文信息
 		List list = lockerService.queryDataById(filterMap);
 		// 根据id获取标签信息
 		List taglist = lockerService.queryDataTagById(filterMap);
-		// StringBuffer sb=new StringBuffer("");
-		// for (int i = 0; i < list.size(); i++) {
-		// Object [] obj=(Object [])list.get(i);
-		// sb.append("<img src=\""+obj[1]+"\" alt=\"\" style=\"word-wrap: break-word !important; box-sizing: border-box !important; visibility: visible !important; width: auto !important;\"/><br/>");
-		// sb.append("<p style=\"max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important; line-height: 25px; text-indent: 2em;\">"+obj[2]+"</p><br style=\"max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;\"/>");
-		// }
 		// 根据id获取DataImgTable对象
 		Data_img_table dataImgTable = lockerService.getDataImgTableById(id);
 		ServletActionContext.getRequest().setAttribute("from", from);
+		ServletActionContext.getRequest().setAttribute("theme", theme);
 		ServletActionContext.getRequest().setAttribute("list", list);
 		ServletActionContext.getRequest().setAttribute("taglist", taglist);
 		ServletActionContext.getRequest().setAttribute("dataImgTable",

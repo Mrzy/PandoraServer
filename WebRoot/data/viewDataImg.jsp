@@ -25,7 +25,96 @@
 <%
 	response.setHeader("Cache-Control","max-age=1800");
 %>
+<body id="activity-detail" onload="addViews()" class="zh_CN " <c:if test="${theme!='night' }">style="background-color: white;"</c:if> <c:if test="${theme=='night' }">style="background-color: #131e22;"</c:if>>
+	<div <c:if test="${theme!='night' }">class="rich_media_day"</c:if> <c:if test="${theme=='night' }">class="rich_media_night"</c:if>>
+	<div id="title" class="rich_media_meta_list" style="text-align: left;width: 100%;height:30%;background-color: 
+	<%
+	if(request.getAttribute("dataImgTable")!=null&&!"".equals(request.getAttribute("dataImgTable"))){
+		Data_img_table dataImgTable=(Data_img_table)request.getAttribute("dataImgTable");
+		   switch(dataImgTable.getId()%5){
+		   case 0:%>#e85c4f<% break;
+		   case 1:%>#26a69a<% break;
+		   case 2:%>#4fa9e8<% break;
+		   case 3:%>#9e4fe8<% break;
+		   case 4:%>#e8894f<% break;
+		   }
+	}
+	%>">
+		<p class="rich_media_title" style="text-align: left;color: #ffffff;padding-left: 15px;padding-right: 15px;padding-top: 25px;line-height: 34px;padding-bottom: 15px;"
+						id="activity-name">${dataImgTable.title }</p>
+		<p style="float: left;margin-top:-2px;color: #fff;padding-left: 17px;font-size: 12px;padding-bottom: 5px;">${dataImgTable.collect_website } </p> 
+		<p style="text-align: right;font-size: 12px;margin-top:-2px;color: #fff;padding-right: 15px;padding-bottom: 5px;">
+			<img alt="" src="<%=request.getContextPath()%>/data/images/eye.png" style="width: 16px;margin-bottom: -1.2px;">
+			<span style="color: #fff;padding-left: 3px;">${dataImgTable.views}</span>
+		</p>
+	</div>
+	<div <c:if test="${theme!='night' }">class="rich_media_inner_day"</c:if> <c:if test="${theme=='night' }">class="rich_media_inner_night"</c:if>>
+		<div id="page-content">
+			<div id="img-content">
+				<div <c:if test="${theme!='night' }">class="rich_media_content_day"</c:if> <c:if test="${theme=='night' }">class="rich_media_content_night"</c:if> id="js_content" style="word-wrap: break-word;word-break:break-all;">
+					<c:forEach items="${list }" var="obj" varStatus="vs">
+						<c:if test="${vs.count==1 }">
+							<p style="margin-top: 12px;">
+								<span
+									style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;padding-top: 100px;">${obj[2]}</span>
+							</p>
+						</c:if>
+					</c:forEach>
+				</div>
+			<div style="height: 64px;"></div>
+		</div>
+	 	</div>
+	</div>
+	<c:if test="${from!='pandora' }">
+		<div id="div1" class="bottomDiv">
+			<div style="width: 740px;margin-left: auto;margin-right: auto;">
+				<table style="width: 100%;">
+					<tr>
+						<td align="left" style="border: 0;width: 45px"><img alt="" style="height: 50px;margin-top:0px;" src="/pandora/data/images/logo.png"></td>
+						<td align="left" style="border: 0;width: 130px;"><span style="font-size: 18px;padding-top: 60px;line-height: 10px;height: 18px;">潘多拉锁屏</span>
+							<br>
+							<span style="font-size: 12px;">全网&nbsp;<img alt="" src="data/images/boom.png" style="width: 20px;margin-bottom: -6px;">&nbsp;点&nbsp;&nbsp;&nbsp;一步到位</span>
+						</td>
+						<td align="left" style="border: 0;width: 505px">
+							<img alt="" src="/pandora/data/images/image.png" style="width: 80px;margin-left: 20px;margin-bottom: 5px;" onclick="downloadApp();">
+							<img alt="" src="/pandora/data/images/close.png" style="width: 18px;margin-left: 8px;margin-bottom: 25px;" onclick="closeDiv();">
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</c:if>
+	</div>
+</body>
+</html>
 <script type="text/javascript">
+	$(document).ready(function(){
+		var imgs=document.getElementsByTagName("img");
+		for(var i=0;i<imgs.length;i++){
+			var img=imgs[i];
+			var imgNew=new Image();
+			imgNew.src=img.src;
+			img.onerror = function (){
+				this.style.width=23+"px";
+				this.style.height=23+"px";
+				this.parentNode.style.textAlign="center";
+			};
+			if(img.src.endWith(".gif")){
+				img.style.width=imgNew.width+"px";
+			}
+		}
+	});
+	String.prototype.endWith=function(str){
+		if(str==null||str==""||this.length==0||str.length>this.length){
+		  return false;
+		}
+		if(this.substring(this.length-str.length)==str){
+		  return true;
+		}else{
+		  return false;
+		}
+		return true;
+	}
 	function addViews(){
 		var params = {"id": '${dataImgTable.id}'};  
 		var actionUrl = "<%=request.getContextPath()%>/locker!addViews.action";  
@@ -62,68 +151,3 @@
 		window.location.href="http://fir.im/hdlocker";
 	}
 </script>
- <style>
-
-</style>
-<body id="activity-detail" class="zh_CN " onload="addViews()">
-	<div class="rich_media">
-	<div id="title" class="rich_media_meta_list" style="text-align: left;width: 100%;height:30%;background-color: 
-	<%
-	if(request.getAttribute("dataImgTable")!=null&&!"".equals(request.getAttribute("dataImgTable"))){
-		Data_img_table dataImgTable=(Data_img_table)request.getAttribute("dataImgTable");
-		   switch(dataImgTable.getId()%5){
-		   case 0:%>#e85c4f<% break;
-		   case 1:%>#26a69a<% break;
-		   case 2:%>#4fa9e8<% break;
-		   case 3:%>#9e4fe8<% break;
-		   case 4:%>#e8894f<% break;
-		   }
-	}
-	%>">
-		<p class="rich_media_title" style="text-align: left;color: #ffffff;padding-left: 15px;padding-right: 15px;padding-top: 25px;line-height: 34px;padding-bottom: 15px;"
-						id="activity-name">${dataImgTable.title }</p>
-		<p style="float: left;margin-top:-2px;color: #fff;padding-left: 17px;font-size: 12px;padding-bottom: 5px;">${dataImgTable.collect_website } </p> 
-		<p style="text-align: right;font-size: 12px;margin-top:-2px;color: #fff;padding-right: 15px;padding-bottom: 5px;">
-			<img alt="" src="<%=request.getContextPath()%>/data/images/eye.png" style="width: 16px;margin-bottom: -1.2px;">
-			<span style="color: #fff;padding-left: 3px;">${dataImgTable.views}</span>
-		</p>
-	</div>
-	<div class="rich_media_inner">
-		<div id="page-content">
-			<div id="img-content">
-				<div class="rich_media_content" id="js_content" style="word-wrap: break-word;word-break:break-all;">
-					<c:forEach items="${list }" var="obj" varStatus="vs">
-						<c:if test="${vs.count==1 }">
-							<p style="margin-top: 12px;">
-								<span
-									style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;padding-top: 100px;">${obj[2]}</span>
-							</p>
-						</c:if>
-					</c:forEach>
-				</div>
-			<div style="height: 64px;"></div>
-		</div>
-	 	</div>
-	</div>
-	<c:if test="${from!='pandora' }">
-		<div id="div1" class="bottomDiv">
-			<div style="width: 740px;margin-left: auto;margin-right: auto;">
-				<table style="width: 100%;">
-					<tr>
-						<td align="left" style="border: 0;width: 37px"><img alt="" style="height: 40px;margin-top:5px;" src="<%=request.getContextPath()%>/data/images/logo.png"></td>
-						<td align="left" style="border: 0;width: 130px; padding-top: 2px;">
-							<div style="font-size: 15px;">潘多拉锁屏</div>
-							<div style="font-size: 12px;">全网&nbsp;<img alt="" src="data/images/boom.png" style="width: 20px;margin-bottom: -6px;">&nbsp;点&nbsp;&nbsp;&nbsp;一步到位</div>
-						</td>
-						<td align="left" style="border: 0;width: 505px">
-							<img alt="" src="<%=request.getContextPath()%>/data/images/image.png" style="width: 70px;margin-left: 28px;margin-bottom: 5px;" onclick="downloadApp();">
-							<img alt="" src="<%=request.getContextPath()%>/data/images/close.png" style="width: 18px;margin-left: 10px;margin-bottom: 25px;" onclick="closeDiv();">
-						</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-	</c:if>
-	</div>
-</body>
-</html>

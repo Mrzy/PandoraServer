@@ -262,6 +262,7 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 	public int addDataImgTableTop(String id) {
 		Data_img_table dit=(Data_img_table)getSession().get(Data_img_table.class, Integer.parseInt(id));
 		dit.setTop(dit.getTop()+1);
+		dit.setData_top(dit.getData_top()+1);
 		getSession().update(dit);
 		return dit.getTop();
 	}

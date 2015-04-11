@@ -17,6 +17,7 @@ public class Data_img_table {
 	private String data_type;
 	private int views;
 	private int data_view;
+	private int data_top;
 	private String news_type;
 	private int data_sub;
 	private String type;
@@ -117,6 +118,12 @@ public class Data_img_table {
 	}
 	public void setUserid(int userid) {
 		this.userid = userid;
+	}
+	public int getData_top() {
+		return data_top;
+	}
+	public void setData_top(int data_top) {
+		this.data_top = data_top;
 	}
 	
 }
