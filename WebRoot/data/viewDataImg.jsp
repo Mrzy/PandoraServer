@@ -101,6 +101,7 @@
 			};
 			if(img.src.endWith(".gif")){
 				img.style.width=imgNew.width+"px";
+				img.parentNode.style.textAlign="center";
 			}
 		}
 	});
