@@ -20,7 +20,11 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/data/css.css" />
 <script type="text/javascript"
-	src="<%=request.getContextPath()%>/data/jquery-1.7.2.min.js"></script>
+	src="<%=request.getContextPath()%>/data/jquery-1.7.2.min.js">
+	</script>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/data/jquery.lazyload.js">
+	</script>
 </head>
 <%
 	response.setHeader("Cache-Control","max-age=1800");
@@ -88,22 +92,11 @@
 </body>
 </html>
 <script type="text/javascript">
-	$(document).ready(function(){
-		var imgs=document.getElementsByTagName("img");
-		for(var i=0;i<imgs.length;i++){
-			var img=imgs[i];
-			var imgNew=new Image();
-			imgNew.src=img.src;
-			img.onerror = function (){
-				this.style.width=23+"px";
-				this.style.height=23+"px";
-				this.parentNode.style.textAlign="center";
-			};
-			if(img.src.endWith(".gif")){
-				img.style.width=imgNew.width+"px";
-				img.parentNode.style.textAlign="center";
-			}
-		}
+	$(function(){
+	  $('img').lazyload({
+		  placeholder : "<%=request.getContextPath()%>/data/images/grey.gif", //加载图片前的占位图片
+	       effect     : "fadeIn" //加载图片使用的效果(淡入)
+	  });
 	});
 	String.prototype.endWith=function(str){
 		if(str==null||str==""||this.length==0||str.length>this.length){
