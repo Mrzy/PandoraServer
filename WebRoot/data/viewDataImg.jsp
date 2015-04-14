@@ -93,9 +93,9 @@
 </html>
 <script type="text/javascript">
 	$(function(){
-	  $('img').lazyload({
-		  placeholder : "<%=request.getContextPath()%>/data/images/grey.gif", //加载图片前的占位图片
-	       effect     : "fadeIn" //加载图片使用的效果(淡入)
+	  $('#js_content img').lazyload({
+		  placeholder : '<%=request.getContextPath()%>/data/images/grey.gif',
+		  effect:'fadeIn'
 	  });
 	});
 	String.prototype.endWith=function(str){
