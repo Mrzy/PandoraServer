@@ -6,6 +6,7 @@ import java.util.Map;
 import cn.zmdx.locker.dao.interfaces.LockerDAO;
 import cn.zmdx.locker.entity.Data_img_table;
 import cn.zmdx.locker.entity.Data_table;
+import cn.zmdx.locker.entity.Font;
 import cn.zmdx.locker.entity.Img;
 import cn.zmdx.locker.entity.WallPaper;
 import cn.zmdx.locker.service.interfaces.LockerService;
@@ -72,6 +73,16 @@ public class LockerServiceImpl implements LockerService {
 	@Override
 	public int addWallPaperTop(String id) {
 		return lockerDAO.addWallPaperTop(id);
+	}
+
+	@Override
+	public List<Font> queryFont() {
+		return lockerDAO.queryFont();
+	}
+
+	@Override
+	public List<Data_img_table> queryStickDataImgTableNew(Map<String, String> filterMap) {
+		return lockerDAO.queryStickDataImgTableNew(filterMap);
 	}
 
 }

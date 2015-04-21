@@ -6,6 +6,7 @@ import java.util.Map;
 
 import cn.zmdx.locker.entity.Data_img_table;
 import cn.zmdx.locker.entity.Data_table;
+import cn.zmdx.locker.entity.Font;
 import cn.zmdx.locker.entity.Img;
 import cn.zmdx.locker.entity.WallPaper;
 
@@ -90,5 +91,22 @@ public interface LockerDAO extends ParentDAO {
     * return 返回top值
     */
    public int addWallPaperTop(String id);
+
+   /**
+    * 获取字体
+    * @author louxiaojian
+    * @date： 日期：2015-4-20 时间：下午2:39:57
+    * @return
+    */
+   public List<Font> queryFont();
+
+   /**
+    * 获取置顶新闻数据
+    * @author louxiaojian
+    * @date： 日期：2015-4-20 时间：下午5:07:49
+    * @param filterMap
+    * @return
+    */
+   public List<Data_img_table> queryStickDataImgTableNew(Map<String, String> filterMap);
 	
 }

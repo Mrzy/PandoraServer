@@ -6,14 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
 import cn.zmdx.locker.entity.Data_img_table;
 import cn.zmdx.locker.entity.Data_table;
-import cn.zmdx.locker.entity.Data_tag;
+import cn.zmdx.locker.entity.Font;
 import cn.zmdx.locker.entity.WallPaper;
 import cn.zmdx.locker.service.impl.LockerServiceImpl;
 
@@ -241,11 +239,26 @@ public class LockerAction extends ActionSupport implements
 		try {
 			List<Data_img_table> list = lockerService
 					.queryDataImgTableNew(filterMap);
-			if (null != list && list.size() > 0)
-				out.print("{\"state\":\"success\",\"data\":"
-						+ JSON.toJSONString(list, true) + "}");
-			else
-				out.print("{\"state\":\"null\"}");
+			List<Data_img_table> sticklist = lockerService
+					.queryStickDataImgTableNew(filterMap);
+			StringBuffer sb=new StringBuffer();
+			if((null != list && list.size() > 0)||(null != sticklist && sticklist.size() > 0)){
+				sb.append("{\"state\":\"success\"");
+				if(null != list && list.size() > 0){
+					sb.append(",\"data\":"+ JSON.toJSONString(list, true));
+				}else{
+					sb.append(",\"data\":\"null\"");
+				}
+				if(null != sticklist && sticklist.size() > 0){
+					sb.append(",\"stickData\":"+ JSON.toJSONString(sticklist, true));
+				}else{
+					sb.append(",\"stickData\":\"null\"");
+				}
+				sb.append("}");
+			}else{
+				sb.append("{\"state\":\"success\",\"data\":\"null\",\"stickData\":\"null\"}");
+			}
+				out.print(sb.toString());
 		} catch (Exception e) {
 			out.print("{\"state\":\"error\"}");
 			logger.error(e);
@@ -338,6 +351,28 @@ public class LockerAction extends ActionSupport implements
 		try {
 			int top=lockerService.addWallPaperTop(id);
 			out.print("{\"state\":\"success\",\"top\":"+top+"}");
+		} catch (Exception e) {
+			out.print("{\"state\":\"error\"}");
+			logger.error(e);
+			e.printStackTrace();
+		}
+		out.flush();
+		out.close();
+	}
+	
+	/**
+	 * 获取字体
+	 * @author louxiaojian
+	 * @date： 日期：2015-4-20 时间：下午2:31:46
+	 * @throws IOException
+	 */
+	public void queryFont() throws IOException{
+		ServletActionContext.getResponse().setContentType(
+				"text/json; charset=utf-8");
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		try {
+			List<Font> list=lockerService.queryFont();
+			out.print("{\"state\":\"success\",\"data\":"+JSON.toJSONString(list, true)+"}");
 		} catch (Exception e) {
 			out.print("{\"state\":\"error\"}");
 			logger.error(e);

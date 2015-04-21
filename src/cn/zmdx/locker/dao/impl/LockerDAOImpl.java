@@ -12,6 +12,7 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import cn.zmdx.locker.dao.interfaces.LockerDAO;
 import cn.zmdx.locker.entity.Data_img_table;
 import cn.zmdx.locker.entity.Data_table;
+import cn.zmdx.locker.entity.Font;
 import cn.zmdx.locker.entity.Img;
 import cn.zmdx.locker.entity.WallPaper;
 import cn.zmdx.locker.util.String2list2mapUtil;
@@ -199,7 +200,7 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 				.get("lastModified")));// 时间戳转换为时间
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat dfl = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		sql.append("select id,title,url,imgUrl,data_type,collect_website,release_time,top,step,collect_time,news_type,data_sub,type,userid from (select id,title,url,imgUrl,data_type,collect_website,release_time,top,step,collect_time,news_type,data_sub,type,userid from data_img_table where 1=1 ");
+		sql.append("select id,title,url,imgUrl,data_type,collect_website,release_time,top,step,collect_time,news_type,data_sub,type,userid from (select id,title,url,imgUrl,data_type,collect_website,release_time,top,step,collect_time,news_type,data_sub,type,userid from data_img_table where 1=1 and stick !='1' ");
 		if (filterMap != null && !filterMap.isEmpty()) {
 			if (!"".equals(filterMap.get("type"))
 					&& filterMap.get("type") != null
@@ -253,7 +254,9 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 		}
 		Query query = getSession().createQuery(sql.toString());
 		if (filterMap != null && !filterMap.isEmpty()) {
-			query.setMaxResults(Integer.parseInt(filterMap.get("limit")));
+			if(!"0".equals(filterMap.get("flag"))||!"true".equals(filterMap.get("isDebug"))){
+				query.setMaxResults(Integer.parseInt(filterMap.get("limit")));
+			}
 		}
 		return query.list();
 	}
@@ -273,6 +276,30 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 		wp.setTop(wp.getTop()+1);
 		getSession().update(wp);
 		return wp.getTop();
+	}
+
+	@Override
+	public List<Font> queryFont() {
+		Query query = getSession().createQuery("from Font ");
+		return query.list();
+	}
+
+	@Override
+	public List<Data_img_table> queryStickDataImgTableNew(Map<String, String> filterMap) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("select id,title,url,imgUrl,data_type,collect_website,release_time,top,step,collect_time,news_type,data_sub,type,userid from (select id,title,url,imgUrl,data_type,collect_website,release_time,top,step,collect_time,news_type,data_sub,type,userid from data_img_table where 1=1 and stick ='1' ");
+		if (filterMap != null && !filterMap.isEmpty()) {
+			if(!"".equals(filterMap.get("type"))&&filterMap.get("type")!=null){
+				sql.append(" and type = '"+filterMap.get("type")+"' ");
+			}
+//			if(!"".equals(filterMap.get("limit"))&&filterMap.get("limit")!=null){
+//				sql.append(filterMap.get("limit"));
+//			}
+		}
+		sql.append("order by collect_time desc limit 3 ) t");
+		//将返回结果映射到具体的类。可以是实体类，也可以是普通的pojo类
+		Query query = getSession().createSQLQuery(sql.toString()).setResultTransformer(Transformers.aliasToBean(Data_img_table.class));
+		return query.list();
 	}
 
 }

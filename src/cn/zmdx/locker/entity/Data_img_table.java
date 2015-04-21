@@ -22,6 +22,7 @@ public class Data_img_table {
 	private int data_sub;
 	private String type;
 	private int userid;
+	private String stick;
 	
 	public int getId() {
 		return id;
@@ -124,6 +125,12 @@ public class Data_img_table {
 	}
 	public void setData_top(int data_top) {
 		this.data_top = data_top;
+	}
+	public String getStick() {
+		return stick;
+	}
+	public void setStick(String stick) {
+		this.stick = stick;
 	}
 	
 }
