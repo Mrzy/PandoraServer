@@ -286,20 +286,28 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 
 	@Override
 	public List<Data_img_table> queryStickDataImgTableNew(Map<String, String> filterMap) {
-		StringBuffer sql = new StringBuffer();
-		sql.append("select id,title,url,imgUrl,data_type,collect_website,release_time,top,step,collect_time,news_type,data_sub,type,userid from (select id,title,url,imgUrl,data_type,collect_website,release_time,top,step,collect_time,news_type,data_sub,type,userid from data_img_table where 1=1 and stick ='1' ");
-		if (filterMap != null && !filterMap.isEmpty()) {
-			if(!"".equals(filterMap.get("type"))&&filterMap.get("type")!=null){
-				sql.append(" and type = '"+filterMap.get("type")+"' ");
+		if("0".equals(filterMap.get("flag"))){
+			if("1".equals(filterMap.get("type"))||"3".equals(filterMap.get("type"))){
+				StringBuffer sql = new StringBuffer();
+				sql.append("select id,title,url,imgUrl,data_type,collect_website,release_time,top,step,collect_time,news_type,data_sub,type,userid from (select id,title,url,imgUrl,data_type,collect_website,release_time,top,step,collect_time,news_type,data_sub,type,userid from data_img_table where 1=1 and stick ='1' ");
+				if (filterMap != null && !filterMap.isEmpty()) {
+					if(!"".equals(filterMap.get("type"))&&filterMap.get("type")!=null){
+						sql.append(" and type = '"+filterMap.get("type")+"' ");
+					}
+//					if(!"".equals(filterMap.get("limit"))&&filterMap.get("limit")!=null){
+//						sql.append(filterMap.get("limit"));
+//					}
+				}
+				sql.append("order by collect_time desc limit 3 ) t");
+				//将返回结果映射到具体的类。可以是实体类，也可以是普通的pojo类
+				Query query = getSession().createSQLQuery(sql.toString()).setResultTransformer(Transformers.aliasToBean(Data_img_table.class));
+				return query.list();
+			}else{
+				return null;
 			}
-//			if(!"".equals(filterMap.get("limit"))&&filterMap.get("limit")!=null){
-//				sql.append(filterMap.get("limit"));
-//			}
+		}else{
+			return null;
 		}
-		sql.append("order by collect_time desc limit 3 ) t");
-		//将返回结果映射到具体的类。可以是实体类，也可以是普通的pojo类
-		Query query = getSession().createSQLQuery(sql.toString()).setResultTransformer(Transformers.aliasToBean(Data_img_table.class));
-		return query.list();
 	}
 
 }
