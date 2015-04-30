@@ -97,6 +97,11 @@
 		  placeholder : '<%=request.getContextPath()%>/data/images/grey.gif',
 		  effect:'fadeIn'
 	  });
+	  var type='${dataImgTable.type}';
+	  if(type!=5){
+		  $('#js_content img:first').fadeOut(0);
+		  $('#js_content img:first').fadeIn(1000);
+	  }
 	});
 	String.prototype.endWith=function(str){
 		if(str==null||str==""||this.length==0||str.length>this.length){

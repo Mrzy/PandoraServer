@@ -18,6 +18,7 @@
 		<property name="data_view" column="data_view" />
 		<property name="data_top" column="data_top" />
 		<property name="stick" column="stick" />
+		<property name="type" column="type" />
 	</class>
 
 </hibernate-mapping>
