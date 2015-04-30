@@ -100,7 +100,7 @@
 	  var type='${dataImgTable.type}';
 	  if(type!=5){
 		  $('#js_content img:first').fadeOut(0);
-		  $('#js_content img:first').fadeIn(1000);
+		  $('#js_content img:first').fadeIn(500);
 	  }
 	});
 	String.prototype.endWith=function(str){
