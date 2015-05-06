@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.transform.Transformers;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
@@ -98,11 +100,16 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 						+ "'  ");
 			}
 			sql.append(" and collect_time like  '%" + df.format(date) + "%'  ");
-			sql.append(" LIMIT "+Integer.parseInt(filterMap.get("limit"))+" ) t  ORDER BY RAND() ");
+			sql.append(" LIMIT " + Integer.parseInt(filterMap.get("limit"))
+					+ " ) t  ORDER BY RAND() ");
 		}
-		Query query = getSession().createSQLQuery(sql.toString()).setResultTransformer(Transformers.aliasToBean(Data_img_table.class));
+		Session session = this.getHibernateTemplate().getSessionFactory()
+				.getCurrentSession();
+		Query query = session.createSQLQuery(sql.toString())
+				.setResultTransformer(
+						Transformers.aliasToBean(Data_img_table.class));
 		if (filterMap != null && !filterMap.isEmpty()) {
-//			query.setMaxResults(Integer.parseInt(filterMap.get("limit")));
+			// query.setMaxResults(Integer.parseInt(filterMap.get("limit")));
 			if (!"".equals(filterMap.get("webSite"))
 					&& filterMap.get("webSite") != null
 					&& !"''".equals(filterMap.get("webSite"))
@@ -129,23 +136,24 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 
 	@Override
 	public List<Img> queryDataById(Map<String, String> filterMap) {
-		StringBuffer sql=new StringBuffer("select i.id,i.imageUrl,i.content from img i left join data_img d on d.img_id=i.id where 1=1 ");
+		StringBuffer sql = new StringBuffer(
+				"select i.id,i.imageUrl,i.content from img i left join data_img d on d.img_id=i.id where 1=1 ");
 		if (filterMap != null && !filterMap.isEmpty()) {
-			if (!"".equals(filterMap.get("id"))
-					&& filterMap.get("id") != null
+			if (!"".equals(filterMap.get("id")) && filterMap.get("id") != null
 					&& !"''".equals(filterMap.get("id"))
 					&& !"null".equals(filterMap.get("id"))) {
-				sql.append(" and d.data_id="+filterMap.get("id"));
+				sql.append(" and d.data_id=" + filterMap.get("id"));
 			}
 		}
 		Query query = getSession().createSQLQuery(sql.toString());
-		
+
 		return query.list();
 	}
 
 	@Override
 	public Data_img_table getDataImgTableById(String id) {
-		return (Data_img_table)this.getHibernateTemplate().get(Data_img_table.class, Integer.parseInt(id));
+		return (Data_img_table) this.getHibernateTemplate().get(
+				Data_img_table.class, Integer.parseInt(id));
 	}
 
 	public List<WallPaper> queryWallPaper(Map<String, String> filterMap) {
@@ -166,25 +174,29 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 
 	@Override
 	public List queryDataTagById(Map<String, String> filterMap) {
-		StringBuffer sql=new StringBuffer("select t.id,t.tag_name from tag t left join data_tag dt on dt.tag_id=t.id where 1=1 ");
+		StringBuffer sql = new StringBuffer(
+				"select t.id,t.tag_name from tag t left join data_tag dt on dt.tag_id=t.id where 1=1 ");
 		if (filterMap != null && !filterMap.isEmpty()) {
-			if (!"".equals(filterMap.get("id"))
-					&& filterMap.get("id") != null
+			if (!"".equals(filterMap.get("id")) && filterMap.get("id") != null
 					&& !"''".equals(filterMap.get("id"))
 					&& !"null".equals(filterMap.get("id"))) {
-				sql.append(" and dt.data_id="+filterMap.get("id"));
+				sql.append(" and dt.data_id=" + filterMap.get("id"));
 			}
 		}
 		Query query = getSession().createSQLQuery(sql.toString());
-		
+
 		return query.list();
 	}
 
 	@Override
 	public void addViews(String id) {
-		int view = (int)((Math.random()*5 + 3)*3-7);
-		StringBuffer sql=new StringBuffer("update data_img_table set views = views +"+view+" where id = "+id+" ");
-		StringBuffer data_sql=new StringBuffer("update data_img_table set data_view = data_view + 1 where id = "+id+" ");
+		int view = (int) ((Math.random() * 5 + 3) * 3 - 7);
+		StringBuffer sql = new StringBuffer(
+				"update data_img_table set views = views +" + view
+						+ " where id = " + id + " ");
+		StringBuffer data_sql = new StringBuffer(
+				"update data_img_table set data_view = data_view + 1 where id = "
+						+ id + " ");
 		Query query = getSession().createSQLQuery(sql.toString());
 		Query data_query = getSession().createSQLQuery(data_sql.toString());
 		query.executeUpdate();
@@ -206,25 +218,31 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 					&& filterMap.get("type") != null
 					&& !"''".equals(filterMap.get("type"))
 					&& !"null".equals(filterMap.get("type"))) {
-				sql.append(" and type = '"+filterMap.get("type")+"' ");
+				sql.append(" and type = '" + filterMap.get("type") + "' ");
 			}
-			if("0".equals(filterMap.get("flag"))){
-				if(!"0".equals(filterMap.get("lastModified"))){
-					sql.append(" and collect_time > '" + dfl.format(lastModified)+ "'  ");
-					sql.append(" and collect_time < '" + dfl.format(date)+ "'  ");
+			if ("0".equals(filterMap.get("flag"))) {
+				if (!"0".equals(filterMap.get("lastModified"))) {
+					sql.append(" and collect_time > '"
+							+ dfl.format(lastModified) + "'  ");
+					sql.append(" and collect_time < '" + dfl.format(date)
+							+ "'  ");
 				}
-			}else if("1".equals(filterMap.get("flag"))){
-				if(!"0".equals(filterMap.get("lastModified"))){
-					sql.append(" and collect_time < '" + dfl.format(lastModified)+ "'  ");
+			} else if ("1".equals(filterMap.get("flag"))) {
+				if (!"0".equals(filterMap.get("lastModified"))) {
+					sql.append(" and collect_time < '"
+							+ dfl.format(lastModified) + "'  ");
 				}
 			}
-			if("0".equals(filterMap.get("lastModified"))){
+			if ("0".equals(filterMap.get("lastModified"))) {
 				sql.append(" and collect_time < '" + dfl.format(date) + "' ");
 			}
-			sql.append(" order by collect_time desc limit "+Integer.parseInt(filterMap.get("limit"))+" ) t  ");
+			sql.append(" order by collect_time desc limit "
+					+ Integer.parseInt(filterMap.get("limit")) + " ) t  ");
 		}
-		//将返回结果映射到具体的类。可以是实体类，也可以是普通的pojo类
-		Query query = getSession().createSQLQuery(sql.toString()).setResultTransformer(Transformers.aliasToBean(Data_img_table.class));
+		// 将返回结果映射到具体的类。可以是实体类，也可以是普通的pojo类
+		Query query = getSession().createSQLQuery(sql.toString())
+				.setResultTransformer(
+						Transformers.aliasToBean(Data_img_table.class));
 		return query.list();
 	}
 
@@ -235,56 +253,68 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 		SimpleDateFormat dfl = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date lastModified = new Date(Long.parseLong(filterMap
 				.get("lastModified")));// 时间戳转换为时间
-		String urlPrefix="";
-		String thumbPrefix="";
-		if("h".equals(filterMap.get("type"))){
-			urlPrefix="http://cos.myqcloud.com/11000436/wallpaper/h/";
-			thumbPrefix="http://cos.myqcloud.com/11000436/wallpaper/h_thumb/";
-		}else if("m".equals(filterMap.get("type"))){
-			urlPrefix="http://cos.myqcloud.com/11000436/wallpaper/m/";
-			thumbPrefix="http://cos.myqcloud.com/11000436/wallpaper/m_thumb/";
-		}else{
-			urlPrefix="http://cos.myqcloud.com/11000436/wallpaper/image/";
-			thumbPrefix="http://cos.myqcloud.com/11000436/wallpaper/thumb/";
+		String urlPrefix = "";
+		String thumbPrefix = "";
+		if ("h".equals(filterMap.get("type"))) {
+			urlPrefix = "http://cos.myqcloud.com/11000436/wallpaper/h/";
+			thumbPrefix = "http://cos.myqcloud.com/11000436/wallpaper/h_thumb/";
+		} else if ("m".equals(filterMap.get("type"))) {
+			urlPrefix = "http://cos.myqcloud.com/11000436/wallpaper/m/";
+			thumbPrefix = "http://cos.myqcloud.com/11000436/wallpaper/m_thumb/";
+		} else {
+			urlPrefix = "http://cos.myqcloud.com/11000436/wallpaper/image/";
+			thumbPrefix = "http://cos.myqcloud.com/11000436/wallpaper/thumb/";
 		}
-		sql.append("select id,p_name,p_desc,p_author,thumbURL,imageURL,imageNAME,imageEXT,publishDATE,top from (select id,p_name,p_desc,p_author,replace(thumbUrl,'http://cos.myqcloud.com/11000436/wallpaper/thumb/','"+thumbPrefix+"') thumbURL,replace(imageUrl,'http://cos.myqcloud.com/11000436/wallpaper/image/','"+urlPrefix+"') imageURL,imageNAME,imageEXT,publishDATE,top from wallpaper where 1=1 ");
-		//sql.append(" and publishDATE <=  '" + dfl.format(date) + "'  ");
+		sql.append("select id,p_name,p_desc,p_author,thumbURL,imageURL,imageNAME,imageEXT,publishDATE,top from (select id,p_name,p_desc,p_author,replace(thumbUrl,'http://cos.myqcloud.com/11000436/wallpaper/thumb/','"
+				+ thumbPrefix
+				+ "') thumbURL,replace(imageUrl,'http://cos.myqcloud.com/11000436/wallpaper/image/','"
+				+ urlPrefix
+				+ "') imageURL,imageNAME,imageEXT,publishDATE,top from wallpaper where 1=1 ");
+		// sql.append(" and publishDATE <=  '" + dfl.format(date) + "'  ");
 		if (filterMap != null && !filterMap.isEmpty()) {
-			if(!"0".equals(filterMap.get("lastModified"))){
-				if("0".equals(filterMap.get("flag"))){
-					sql.append(" and publishDATE > '"+dfl.format(lastModified)+"'");
-					if(!"true".equals(filterMap.get("isDebug"))){
-						sql.append(" and publishDATE < '"+dfl.format(date)+"'");
+			if (!"0".equals(filterMap.get("lastModified"))) {
+				if ("0".equals(filterMap.get("flag"))) {
+					sql.append(" and publishDATE > '"
+							+ dfl.format(lastModified) + "'");
+					if (!"true".equals(filterMap.get("isDebug"))) {
+						sql.append(" and publishDATE < '" + dfl.format(date)
+								+ "'");
 					}
-				}else{
-					sql.append(" and publishDATE < '"+dfl.format(lastModified)+"'");
+				} else {
+					sql.append(" and publishDATE < '"
+							+ dfl.format(lastModified) + "'");
 				}
-			}else{
-				sql.append(" and publishDATE < '"+dfl.format(date)+"'");
+			} else {
+				sql.append(" and publishDATE < '" + dfl.format(date) + "'");
 			}
 			sql.append(" order by publishDATE desc ");
-			if(!"0".equals(filterMap.get("flag"))||!"true".equals(filterMap.get("isDebug"))){
-				sql.append("limit "+filterMap.get("limit"));
+			if (!"0".equals(filterMap.get("flag"))
+					|| !"true".equals(filterMap.get("isDebug"))) {
+				sql.append("limit " + filterMap.get("limit"));
 			}
 			sql.append(") t");
 		}
-		Query query = getSession().createSQLQuery(sql.toString()).setResultTransformer(Transformers.aliasToBean(WallPaper.class));
+		Query query = getSession()
+				.createSQLQuery(sql.toString())
+				.setResultTransformer(Transformers.aliasToBean(WallPaper.class));
 		return query.list();
 	}
 
 	@Override
 	public int addDataImgTableTop(String id) {
-		Data_img_table dit=(Data_img_table)getSession().get(Data_img_table.class, Integer.parseInt(id));
-		dit.setTop(dit.getTop()+1);
-		dit.setData_top(dit.getData_top()+1);
+		Data_img_table dit = (Data_img_table) getSession().get(
+				Data_img_table.class, Integer.parseInt(id));
+		dit.setTop(dit.getTop() + 1);
+		dit.setData_top(dit.getData_top() + 1);
 		getSession().update(dit);
 		return dit.getTop();
 	}
 
 	@Override
 	public int addWallPaperTop(String id) {
-		WallPaper wp=(WallPaper)getSession().get(WallPaper.class, Integer.parseInt(id));
-		wp.setTop(wp.getTop()+1);
+		WallPaper wp = (WallPaper) getSession().get(WallPaper.class,
+				Integer.parseInt(id));
+		wp.setTop(wp.getTop() + 1);
 		getSession().update(wp);
 		return wp.getTop();
 	}
@@ -296,23 +326,28 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 	}
 
 	@Override
-	public List<Data_img_table> queryStickDataImgTableNew(Map<String, String> filterMap) {
-		if("1".equals(filterMap.get("type"))||"3".equals(filterMap.get("type"))){
+	public List<Data_img_table> queryStickDataImgTableNew(
+			Map<String, String> filterMap) {
+		if ("1".equals(filterMap.get("type"))
+				|| "3".equals(filterMap.get("type"))) {
 			StringBuffer sql = new StringBuffer();
 			sql.append("select id,title,url,imgUrl,data_type,collect_website,release_time,top,step,collect_time,news_type,data_sub,type,userid from (select id,title,url,imgUrl,data_type,collect_website,release_time,top,step,collect_time,news_type,data_sub,type,userid from data_img_table where 1=1 and stick ='1' ");
 			if (filterMap != null && !filterMap.isEmpty()) {
-				if(!"".equals(filterMap.get("type"))&&filterMap.get("type")!=null){
-					sql.append(" and type = '"+filterMap.get("type")+"' ");
+				if (!"".equals(filterMap.get("type"))
+						&& filterMap.get("type") != null) {
+					sql.append(" and type = '" + filterMap.get("type") + "' ");
 				}
-//					if(!"".equals(filterMap.get("limit"))&&filterMap.get("limit")!=null){
-//						sql.append(filterMap.get("limit"));
-//					}
+				// if(!"".equals(filterMap.get("limit"))&&filterMap.get("limit")!=null){
+				// sql.append(filterMap.get("limit"));
+				// }
 			}
 			sql.append("order by collect_time desc limit 3 ) t");
-			//将返回结果映射到具体的类。可以是实体类，也可以是普通的pojo类
-			Query query = getSession().createSQLQuery(sql.toString()).setResultTransformer(Transformers.aliasToBean(Data_img_table.class));
+			// 将返回结果映射到具体的类。可以是实体类，也可以是普通的pojo类
+			Query query = getSession().createSQLQuery(sql.toString())
+					.setResultTransformer(
+							Transformers.aliasToBean(Data_img_table.class));
 			return query.list();
-		}else{
+		} else {
 			return null;
 		}
 	}
