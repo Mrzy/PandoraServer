@@ -285,7 +285,7 @@ public class LockerAction extends ActionSupport implements
 		//标示，0查询lastModified之后的数据，1查询lastModified之前的数据
 		String flag=ServletActionContext.getRequest().getParameter("flag");
 		String isDebug=ServletActionContext.getRequest().getParameter("isDebug");
-		String type=ServletActionContext.getRequest().getParameter("type");
+		String heghit=ServletActionContext.getRequest().getParameter("h");
 		if (null == lastModified || "".equals(lastModified)
 				|| "null".equals(lastModified)) {
 			lastModified = "0";
@@ -294,9 +294,21 @@ public class LockerAction extends ActionSupport implements
 				|| "null".equals(limit)|| "0".equals(limit)) {
 			limit = "15";
 		}
-		if(null==type||"".equals(type)){
-			type="xh";
-		}
+		String type="";
+        if(!"".equals(heghit)&&heghit!=null){
+        	int h = Integer.parseInt(heghit);
+    		if (h >= 1900) {
+    			type="xh";
+            } else if (h >= 1200) {
+            	type="h";
+            } else if (h >=800) {
+            	type="m";
+            } else {
+            	type="m";
+            }
+        }else{
+        	type="xh";
+        }
 		Map<String, String> filterMap = new HashMap();
 		filterMap.put("lastModified", lastModified);
 		filterMap.put("limit", limit);
