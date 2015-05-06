@@ -235,7 +235,19 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 		SimpleDateFormat dfl = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date lastModified = new Date(Long.parseLong(filterMap
 				.get("lastModified")));// 时间戳转换为时间
-		sql.append("from WallPaper where 1=1 ");
+		String urlPrefix="";
+		String thumbPrefix="";
+		if("h".equals(filterMap.get("type"))){
+			urlPrefix="http://cos.myqcloud.com/11000436/wallpaper/h/";
+			thumbPrefix="http://cos.myqcloud.com/11000436/wallpaper/h_thumb/";
+		}else if("m".equals(filterMap.get("type"))){
+			urlPrefix="http://cos.myqcloud.com/11000436/wallpaper/m/";
+			thumbPrefix="http://cos.myqcloud.com/11000436/wallpaper/m_thumb/";
+		}else{
+			urlPrefix="http://cos.myqcloud.com/11000436/wallpaper/image/";
+			thumbPrefix="http://cos.myqcloud.com/11000436/wallpaper/thumb/";
+		}
+		sql.append("select id,p_name,p_desc,p_author,thumbURL,imageURL,imageNAME,imageEXT,publishDATE,top from (select id,p_name,p_desc,p_author,replace(thumbUrl,'http://cos.myqcloud.com/11000436/wallpaper/thumb/','"+thumbPrefix+"') thumbURL,replace(imageUrl,'http://cos.myqcloud.com/11000436/wallpaper/image/','"+urlPrefix+"') imageURL,imageNAME,imageEXT,publishDATE,top from wallpaper where 1=1 ");
 		//sql.append(" and publishDATE <=  '" + dfl.format(date) + "'  ");
 		if (filterMap != null && !filterMap.isEmpty()) {
 			if(!"0".equals(filterMap.get("lastModified"))){
@@ -251,13 +263,12 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 				sql.append(" and publishDATE < '"+dfl.format(date)+"'");
 			}
 			sql.append(" order by publishDATE desc ");
-		}
-		Query query = getSession().createQuery(sql.toString());
-		if (filterMap != null && !filterMap.isEmpty()) {
 			if(!"0".equals(filterMap.get("flag"))||!"true".equals(filterMap.get("isDebug"))){
-				query.setMaxResults(Integer.parseInt(filterMap.get("limit")));
+				sql.append("limit "+filterMap.get("limit"));
 			}
+			sql.append(") t");
 		}
+		Query query = getSession().createSQLQuery(sql.toString()).setResultTransformer(Transformers.aliasToBean(WallPaper.class));
 		return query.list();
 	}
 

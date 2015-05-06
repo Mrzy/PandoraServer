@@ -19,7 +19,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">
-					${hibernate.dialect}
+					cn.zmdx.locker.util.CustomMySQLDialect
 				</prop>
 				<prop key="hibernate.show_sql">${hibernate.showsql}</prop>
 				<prop key="hibernate.connection.SetBigStringTryClob">${hibernate.clob}</prop>
