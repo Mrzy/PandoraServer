@@ -212,7 +212,7 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 				.get("lastModified")));// 时间戳转换为时间
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat dfl = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		sql.append("select id,title,url,imgUrl,data_type,collect_website,release_time,top,step,collect_time,news_type,data_sub,type,userid from (select id,title,url,imgUrl,data_type,collect_website,release_time,top,step,collect_time,news_type,data_sub,type,userid from data_img_table where 1=1 and stick !='1' ");
+		sql.append("select id,title,url,imgUrl,data_type,collect_website,release_time,top,step,collect_time,news_type,data_sub,type,userid from (select id,title,url,imgUrl,data_type,collect_website,release_time,top,step,collect_time,news_type,data_sub,type,userid from data_img_table where 1=1 and stick !='1' and data_sub=0 ");
 		if (filterMap != null && !filterMap.isEmpty()) {
 			if (!"".equals(filterMap.get("type"))
 					&& filterMap.get("type") != null
@@ -256,20 +256,30 @@ public class LockerDAOImpl extends ParentDAOImpl implements LockerDAO {
 		String urlPrefix = "";
 		String thumbPrefix = "";
 		if ("h".equals(filterMap.get("type"))) {
-			urlPrefix = "http://cos.myqcloud.com/11000436/wallpaper/h/";
-			thumbPrefix = "http://cos.myqcloud.com/11000436/wallpaper/h_thumb/";
+			urlPrefix = "http://wallpaper-10002468.file.myqcloud.com/h/";
+			thumbPrefix = "http://wallpaper-10002468.file.myqcloud.com/h_thumb/";
 		} else if ("m".equals(filterMap.get("type"))) {
-			urlPrefix = "http://cos.myqcloud.com/11000436/wallpaper/m/";
-			thumbPrefix = "http://cos.myqcloud.com/11000436/wallpaper/m_thumb/";
+			urlPrefix = "http://wallpaper-10002468.file.myqcloud.com/m/";
+			thumbPrefix = "http://wallpaper-10002468.file.myqcloud.com/m_thumb/";
 		} else {
-			urlPrefix = "http://cos.myqcloud.com/11000436/wallpaper/image/";
-			thumbPrefix = "http://cos.myqcloud.com/11000436/wallpaper/thumb/";
+			urlPrefix = "http://wallpaper-10002468.file.myqcloud.com/image/";
+			thumbPrefix = "http://wallpaper-10002468.file.myqcloud.com/thumb/";
 		}
-		sql.append("select id,p_name,p_desc,p_author,thumbURL,imageURL,imageNAME,imageEXT,publishDATE,top from (select id,p_name,p_desc,p_author,replace(thumbUrl,'http://cos.myqcloud.com/11000436/wallpaper/thumb/','"
+		// if ("h".equals(filterMap.get("type"))) {
+		// urlPrefix = "http://cos.myqcloud.com/11000436/wallpaper/h/";
+		// thumbPrefix = "http://cos.myqcloud.com/11000436/wallpaper/h_thumb/";
+		// } else if ("m".equals(filterMap.get("type"))) {
+		// urlPrefix = "http://cos.myqcloud.com/11000436/wallpaper/m/";
+		// thumbPrefix = "http://cos.myqcloud.com/11000436/wallpaper/m_thumb/";
+		// } else {
+		// urlPrefix = "http://cos.myqcloud.com/11000436/wallpaper/image/";
+		// thumbPrefix = "http://cos.myqcloud.com/11000436/wallpaper/thumb/";
+		// }
+		sql.append("select id,p_name,p_desc,p_author,thumbURL,imageURL,imageNAME,imageEXT,publishDATE,top from (select id,p_name,p_desc,p_author,replace(thumbUrl,'http://wallpaper-10002468.file.myqcloud.com/thumb/','"
 				+ thumbPrefix
-				+ "') thumbURL,replace(imageUrl,'http://cos.myqcloud.com/11000436/wallpaper/image/','"
+				+ "') thumbURL,replace(imageUrl,'http://wallpaper-10002468.file.myqcloud.com/image/','"
 				+ urlPrefix
-				+ "') imageURL,imageNAME,imageEXT,publishDATE,top from wallpaper where 1=1 ");
+				+ "') imageURL,imageNAME,imageEXT,publishDATE,top from wallpaper where 1=1 and data_sub=1 ");
 		// sql.append(" and publishDATE <=  '" + dfl.format(date) + "'  ");
 		if (filterMap != null && !filterMap.isEmpty()) {
 			if (!"0".equals(filterMap.get("lastModified"))) {
